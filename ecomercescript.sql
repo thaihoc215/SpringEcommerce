@@ -23,7 +23,7 @@ create table Order_Details (
         Customer_Email varchar(128) not null,
         Customer_Name varchar(255) not null,
         Customer_Phone varchar(128) not null,
-        Order_Date TIME not null,
+        Order_Date date not null,
         Order_Num integer not null,
         primary key (ID)
     );

@@ -5,6 +5,8 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.hochnt.springmvcshop.dao.AccountDAO;
+import org.hochnt.springmvcshop.dao.impl.AccountDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -112,5 +114,23 @@ public class ApplicationContextConfig {
 	}
 	
 	//tạo Bean cho các lớp xử lý DAO tương ứng
-	
+	@Bean(name = "accountDAO")
+	   public AccountDAO getApplicantDAO() {
+	       return new AccountDAOImpl();
+	   }
+	 
+//	   @Bean(name = "productDAO")
+//	   public ProductDAO getProductDAO() {
+//	       return new ProductDAOImpl();
+//	   }
+//	 
+//	   @Bean(name = "orderDAO")
+//	   public OrderDAO getOrderDAO() {
+//	       return new OrderDAOImpl();
+//	   }
+	    
+	   @Bean(name = "accountDAO")
+	   public AccountDAO getAccountDAO()  {
+	       return new AccountDAOImpl();
+	   }
 }
