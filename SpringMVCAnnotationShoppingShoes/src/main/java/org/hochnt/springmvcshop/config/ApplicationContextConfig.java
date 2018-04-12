@@ -32,6 +32,8 @@ public class ApplicationContextConfig {
 	@Autowired
 	private Environment env;
 
+	// Nội dung của validator.properties đã được load bởi ApplicationContextConfig
+	// đưa vào sử dụng trong các resourcebundle được định nghĩa autowird ở các class
 	@Bean
 	public ResourceBundleMessageSource messageSource() {
 		// trả ra các message lỗi được spring cấu hình
@@ -112,25 +114,25 @@ public class ApplicationContextConfig {
 
 		return transactionManager;
 	}
-	
-	//tạo Bean cho các lớp xử lý DAO tương ứng
+
+	// tạo Bean cho các lớp xử lý DAO tương ứng
 	@Bean(name = "accountDAO")
-	   public AccountDAO getApplicantDAO() {
-	       return new AccountDAOImpl();
-	   }
-	 
-//	   @Bean(name = "productDAO")
-//	   public ProductDAO getProductDAO() {
-//	       return new ProductDAOImpl();
-//	   }
-//	 
-//	   @Bean(name = "orderDAO")
-//	   public OrderDAO getOrderDAO() {
-//	       return new OrderDAOImpl();
-//	   }
-	    
-	   @Bean(name = "accountDAO")
-	   public AccountDAO getAccountDAO()  {
-	       return new AccountDAOImpl();
-	   }
+	public AccountDAO getApplicantDAO() {
+		return new AccountDAOImpl();
+	}
+
+	// @Bean(name = "productDAO")
+	// public ProductDAO getProductDAO() {
+	// return new ProductDAOImpl();
+	// }
+	//
+	// @Bean(name = "orderDAO")
+	// public OrderDAO getOrderDAO() {
+	// return new OrderDAOImpl();
+	// }
+
+	@Bean(name = "accountDAO")
+	public AccountDAO getAccountDAO() {
+		return new AccountDAOImpl();
+	}
 }

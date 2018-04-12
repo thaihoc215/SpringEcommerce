@@ -48,13 +48,12 @@ public class MyDBAuthenticationService implements UserDetailsService {
 		boolean credentialsNonExpired = true;
 		boolean accountNonLocked = true;
 
-		UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
-				account.getPassword(), enabled, accountNonExpired, //
-				credentialsNonExpired, accountNonLocked, grantList);
+//		 UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
+//		 account.getPassword(), enabled, accountNonExpired, //
+//		 credentialsNonExpired, accountNonLocked, grantList);
 
+		UserDetails userDetails = User.withUsername(account.getUserName()).password("{noop}" + account.getPassword()).roles(role).build();
 		return userDetails;
 	}
-	
-	
 
 }

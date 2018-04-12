@@ -2,6 +2,7 @@ package org.hochnt.springmvcshop.dao.impl;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,9 +26,11 @@ public class AccountDAOImpl implements AccountDAO{
 //		crit.add(Restrictions.eq("userName", userName));
 		// Create CriteriaBuilder
 		CriteriaBuilder builder = sess.getCriteriaBuilder();
-		CriteriaQuery<Account> criteria = builder.createQuery(Account.class);
-		criteria.from(Account.class);
-        return (Account) sess.createQuery(criteria).getSingleResult();
+		CriteriaQuery<Account> query  = builder.createQuery(Account.class);
+		Root<Account> root = query .from(Account.class);
+		query.select(root);
+		Object tmp = sess.createQuery(query).getResultList().get(0);
+        return (Account) tmp;
 	}
 
 }
