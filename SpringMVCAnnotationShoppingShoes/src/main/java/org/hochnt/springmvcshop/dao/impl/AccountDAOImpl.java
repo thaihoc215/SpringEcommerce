@@ -13,24 +13,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 //Transactional for Hibernate
 @Transactional
-public class AccountDAOImpl implements AccountDAO{
+public class AccountDAOImpl implements AccountDAO {
 
 	@Autowired
-	//nhan tu applicationConfig
+	// nhan tu applicationConfig
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public Account findAccount(String userName) {
 		Session sess = sessionFactory.getCurrentSession();
-//		Criteria crit = sess.createCriteria(Account.class);
-//		crit.add(Restrictions.eq("userName", userName));
+		// Criteria crit = sess.createCriteria(Account.class);
+		// crit.add(Restrictions.eq("userName", userName));
+		// return (Account) crit.uniqueResult();
 		// Create CriteriaBuilder
 		CriteriaBuilder builder = sess.getCriteriaBuilder();
-		CriteriaQuery<Account> query  = builder.createQuery(Account.class);
-		Root<Account> root = query .from(Account.class);
+		CriteriaQuery<Account> query = builder.createQuery(Account.class);
+		Root<Account> root = query.from(Account.class);
 		query.select(root);
-		Object tmp = sess.createQuery(query).getResultList().get(0);
-        return (Account) tmp;
+		query.where(builder.equal(root.get("userName"), userName));
+		Object tmp = sess.createQuery(query).uniqueResult();
+		return (Account) tmp;
+
 	}
 
 }

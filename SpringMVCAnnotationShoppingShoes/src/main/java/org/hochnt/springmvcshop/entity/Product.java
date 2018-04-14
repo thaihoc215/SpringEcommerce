@@ -26,6 +26,10 @@ public class Product implements Serializable {
 	private double price;
 	private byte[] image;
 
+	public Product() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	// For sort.
 	private Date createDate;
 

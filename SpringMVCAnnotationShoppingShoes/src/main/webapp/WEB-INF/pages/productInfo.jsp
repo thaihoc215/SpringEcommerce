@@ -3,14 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PRODUCT (MANAGER)</title>
+<title>View product information</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/style.css">
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_menu.jsp" />
-	<div class="page-title">EDIT PRODUCT</div>
+	<div class="page-title">PRODUCT INFO</div>
 	
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>
