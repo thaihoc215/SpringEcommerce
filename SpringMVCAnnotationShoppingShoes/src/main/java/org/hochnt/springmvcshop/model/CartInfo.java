@@ -59,7 +59,7 @@ public class CartInfo {
 		
 		if(cartLineInfo == null) {
 			cartLineInfo = new CartLineInfo();
-			cartLineInfo.setQuantity(quantity);
+			cartLineInfo.setQuantity(0);
 			cartLineInfo.setProductInfo(productInfo);
 			this.cartLines.add(cartLineInfo);
 		}
@@ -75,4 +75,51 @@ public class CartInfo {
 	public void validate() {
 		 
     }
+	
+	/**
+	 * Update so san pham trong gio hang
+	 * @param code
+	 * @param quantity
+	 */
+	private void updateProduct(String code, int quantity) {
+		CartLineInfo line = this.findLineByCode(code);
+
+		if (line != null) {
+			if (quantity <= 0) {
+				this.cartLines.remove(line);
+			} else {
+				line.setQuantity(quantity);
+			}
+		}
+	}
+	
+	/**
+	 * Xoa san pham trong gio hang
+	 * @param productInfo
+	 */
+	public void removeProduct(ProductInfo productInfo) {
+		CartLineInfo line = this.findLineByCode(productInfo.getCode());
+		if (line!=null) {
+			this.cartLines.remove(line);
+		}
+	}
+	
+	/**
+	 * Update so luong san pham trong gio hang
+	 * @param cartForm
+	 */
+	public void updateQuantity(CartInfo cartForm) {
+		if(cartForm!=null) {
+			List<CartLineInfo> lst = cartForm.getCartLines();
+			for (CartLineInfo line : lst) {
+				this.updateProduct(line.getProductInfo().getCode(), line.getQuantity());
+			}
+		}
+	}
+	
+	//kiem tra gio hang trong
+	public boolean isEmpty() {
+        return this.cartLines.isEmpty();
+    }
+	
 }

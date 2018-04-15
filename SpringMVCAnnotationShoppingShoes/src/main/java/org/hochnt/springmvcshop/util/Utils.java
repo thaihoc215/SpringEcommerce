@@ -11,7 +11,7 @@ public class Utils {
 		// Thông tin giỏ hàng có thể đã lưu vào trong Session trước đó.
 		CartInfo cartInfo = (CartInfo) request.getSession().getAttribute("myCart");
 
-		// Nếu chưa tạo giỏ hàng, tạo nó.
+		// tao gio hang neu gio hang trong session = null
 		if (cartInfo == null) {
 			cartInfo = new CartInfo();
 

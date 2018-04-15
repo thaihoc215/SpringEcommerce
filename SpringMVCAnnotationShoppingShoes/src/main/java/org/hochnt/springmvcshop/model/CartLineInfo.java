@@ -1,8 +1,8 @@
 package org.hochnt.springmvcshop.model;
 
 public class CartLineInfo {
-	ProductInfo productInfo;
-	int quantity;
+	private ProductInfo productInfo;
+	private int quantity;
 	
 	public CartLineInfo() {
 		// TODO Auto-generated constructor stub
@@ -23,4 +23,8 @@ public class CartLineInfo {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public double getAmount() {
+        return this.productInfo.getPrice() * this.quantity;
+    }
 }

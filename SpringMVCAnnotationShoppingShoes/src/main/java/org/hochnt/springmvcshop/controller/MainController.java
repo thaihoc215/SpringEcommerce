@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.CartInfo;
+import org.hochnt.springmvcshop.model.CustomerInfo;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.hochnt.springmvcshop.model.ProductInfo;
 import org.hochnt.springmvcshop.util.Utils;
@@ -12,10 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 // Cần thiết cho Hibernate Transaction.
@@ -69,20 +74,93 @@ public class MainController {
 			CartInfo cartInfo = Utils.getCartInSession(request);
 
 			ProductInfo productInfo = new ProductInfo(product);
-
+			// nếu đã có sản phẩm trong giỏ hàng, thì add thêm 1
 			cartInfo.addProduct(productInfo, 1);
 		}
 		// Chuyển sang trang danh sách các sản phẩm đã mua.
 		return "redirect:/shoppingCart";
 	}
 
+	/*---------------------------Giỏ hàng------------------------*/
 	// GET: Hiển thị giỏ hàng.
 	@RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.GET)
 	public String shoppingCartHandler(HttpServletRequest request, Model model) {
-		//Lay danh sach san pham trong session hien tai
+		// Lay danh sach san pham trong session hien tai
 		CartInfo myCart = Utils.getCartInSession(request);
 
 		model.addAttribute("cartForm", myCart);
 		return "shoppingCart";
 	}
+
+	// POST: Cập nhật số lượng cho các sản phẩm trong giỏ hàng
+	@RequestMapping(value = { "/shoppingCart" }, method = RequestMethod.POST)
+	public String shoppingCartUpdateQuantityHandler(HttpServletRequest request, Model model,
+			@ModelAttribute("cartForm") CartInfo cartForm) {
+		// Lay danh sach san pham trong session hien tai
+		CartInfo myCart = Utils.getCartInSession(request);
+
+		myCart.updateQuantity(cartForm);
+		return "redirect:/shoppingCart";
+	}
+
+	// xóa sản phẩm ra khỏi giỏ hàng
+	@RequestMapping({ "/shoppingCartRemoveProduct" })
+	public String removeProductHandler(HttpServletRequest request, Model model,
+			@RequestParam(value = "code", defaultValue = "") String code) {
+		Product product = null;
+		if (code != null && code.length() > 0) {
+			product = productDAO.findProduct(code);
+		}
+		if (product != null) {
+			// check trong session
+			CartInfo cartInfo = Utils.getCartInSession(request);
+			ProductInfo info = new ProductInfo(product);
+			cartInfo.removeProduct(info);
+		}
+		return "redirect:/shoppingCart";
+
+	}
+	/*---------------------------Giỏ hàng------------------------*/
+
+	/*------------------------Thông tin khách hàng--------------------*/
+	// GET:Nhap thong tin khach hang
+	@RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.GET)
+	public String shoppingCartCustomerForm(HttpServletRequest request, Model model) {
+		CartInfo cartInfo = Utils.getCartInSession(request);
+
+		// Kiem tra gio hang
+		if (cartInfo.isEmpty()) {
+			// quay ve gio hang
+			return "redirect:/shoppingCart";
+		}
+		CustomerInfo customerInfo = cartInfo.getCustomerInfo();
+		if (customerInfo == null) {
+			customerInfo = new CustomerInfo();
+		}
+		model.addAttribute("customerForm", customerInfo);
+		return "shoppingCartCustomer";
+	}
+
+	// POST:luu thong tin khach hang
+	@RequestMapping(value = { "/shoppingCartCustomer" }, method = RequestMethod.POST)
+	public String shoppingCartCustomerSave(HttpServletRequest request, Model model,
+			@ModelAttribute("customerForm") @Validated CustomerInfo customerForm, //
+			BindingResult result, //
+			final RedirectAttributes redirectAttributes) {
+		// Kết quả Validate CustomerInfo.
+		// if (result.hasErrors()) {
+		// customerForm.setValid(false);
+		// // Forward to reenter customer info.
+		// // Forward tới trang nhập lại.
+		// return "shoppingCartCustomer";
+		// }
+
+		customerForm.setValid(true);
+		CartInfo cartInfo = Utils.getCartInSession(request);
+		// luu thong tin cua nguoi dung vao session
+		// ghi đè thông tin
+		cartInfo.setCustomerInfo(customerForm);
+		return "redirect:/shoppingCartCustomer";
+	}
+	/*------------------------Thông tin khách hàng--------------------*/
 }
