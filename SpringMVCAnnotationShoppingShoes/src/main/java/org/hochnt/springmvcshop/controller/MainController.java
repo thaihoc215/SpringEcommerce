@@ -11,6 +11,7 @@ import org.hochnt.springmvcshop.model.ProductInfo;
 import org.hochnt.springmvcshop.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -160,7 +161,50 @@ public class MainController {
 		// luu thong tin cua nguoi dung vao session
 		// ghi đè thông tin
 		cartInfo.setCustomerInfo(customerForm);
-		return "redirect:/shoppingCartCustomer";
+
+		// chuyen huong den trang xac nhan
+		return "redirect:/shoppingCartConfirmation";
 	}
 	/*------------------------Thông tin khách hàng--------------------*/
+
+	/*---------Xác nhận và thanh toán đơn hàng*/
+	// GET: Check thông tin xác nhận
+	@RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.GET)
+	public String shoppingCartConfirmationCheck(HttpServletRequest request, Model model) {
+		// Lay thong tin gio hang trong session
+		CartInfo cartInfo = Utils.getCartInSession(request);
+
+		// Chưa mua mặt hàng nào.
+		if (cartInfo.isEmpty()) {
+
+			// Chuyển tới trang danh giỏ hàng
+			return "redirect:/shoppingCart";
+		} else if (!cartInfo.isValidCustomer()) { // kiem tra thong tin khach hang
+
+			// Chuyển tới trang nhập thông tin khách hàng.
+			return "redirect:/shoppingCartCustomer";
+		}
+		return "shoppingCartConfirmation";
+	}
+
+	// POST: Gửi đơn hàng đã xác nhận và lưu đơn hàng
+	@RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.POST)
+	// Tránh ngoại lệ: UnexpectedRollbackException
+	// @Transactional(propagation = Propagation.NEVER)
+	public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
+
+		CartInfo cartInfo = Utils.getCartInSession(request);
+
+		// kiem tra lai gio hang
+		if (cartInfo.isEmpty())
+			return "redirect:/shoppingCart";
+		else if (!cartInfo.isValidCustomer())
+			return "redirect:/shoppingCartCustomer";
+		// luu thong tin vao DAO
+		// xoa gio hang ra khoi session
+		// luu thong tin don hang da mua
+		// di den man hinh hoan thanh viec mua hang
+		return "shoppingCartFinalize";
+	}
+	/*---------Xác nhận và thanh toán đơn hàng*/
 }
