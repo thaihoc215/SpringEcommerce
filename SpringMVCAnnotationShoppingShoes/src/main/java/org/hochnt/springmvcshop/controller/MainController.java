@@ -2,6 +2,7 @@ package org.hochnt.springmvcshop.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.CartInfo;
@@ -29,10 +30,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 // Cần thiết để sử dụng RedirectAttributes
 @EnableWebMvc
 public class MainController {
-	// @Autowired
-	// private OrderDAO orderDAO;
-	//
+	 @Autowired
+	//autowired from appcontext bean get from DAO
+	 private OrderDAO orderDAO;
+	
 	@Autowired
+	//autowired from DAO
 	private ProductDAO productDAO;
 
 	@RequestMapping("/403")
@@ -190,19 +193,28 @@ public class MainController {
 	// POST: Gửi đơn hàng đã xác nhận và lưu đơn hàng
 	@RequestMapping(value = { "/shoppingCartConfirmation" }, method = RequestMethod.POST)
 	// Tránh ngoại lệ: UnexpectedRollbackException
-	// @Transactional(propagation = Propagation.NEVER)
+	@Transactional(propagation = Propagation.NEVER)
 	public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
 
 		CartInfo cartInfo = Utils.getCartInSession(request);
-
+		
 		// kiem tra lai gio hang
 		if (cartInfo.isEmpty())
 			return "redirect:/shoppingCart";
 		else if (!cartInfo.isValidCustomer())
 			return "redirect:/shoppingCartCustomer";
 		// luu thong tin vao DAO
+		try {
+			orderDAO.saveOrder(cartInfo);
+		} catch (Exception e) {
+
+			// Propagation.NEVER?
+			return "shoppingCartConfirmation";
+		}
 		// xoa gio hang ra khoi session
+		Utils.removeCartInSession(request);
 		// luu thong tin don hang da mua
+		Utils.storeLastOrderedCartInSession(request, cartInfo);
 		// di den man hinh hoan thanh viec mua hang
 		return "shoppingCartFinalize";
 	}

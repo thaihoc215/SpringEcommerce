@@ -6,8 +6,10 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.hochnt.springmvcshop.dao.AccountDAO;
+import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.dao.impl.AccountDAOImpl;
+import org.hochnt.springmvcshop.dao.impl.OrderDAOImpl;
 import org.hochnt.springmvcshop.dao.impl.ProductDAOImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -123,15 +125,16 @@ public class ApplicationContextConfig {
 		return new AccountDAOImpl();
 	}
 
-	 @Bean(name = "productDAO")
-	 public ProductDAO getProductDAO() {
-	 return new ProductDAOImpl();
-	 }
-	//
-	// @Bean(name = "orderDAO")
-	// public OrderDAO getOrderDAO() {
-	// return new OrderDAOImpl();
-	// }
+	@Bean(name = "productDAO")
+	public ProductDAO getProductDAO() {
+		return new ProductDAOImpl();
+	}
+
+	@Bean(name = "orderDAO")
+	//khoi tao 1 bean dao de truyen vao cac autowired trong controller
+	public OrderDAO getOrderDAO() {
+		return new OrderDAOImpl();
+	}
 
 	@Bean(name = "accountDAO")
 	public AccountDAO getAccountDAO() {

@@ -20,8 +20,8 @@
 
 	<div class="container">
 		<h3>Thank you for Order</h3>
-		<!-- Hien thi ma so mua hang 
-		Your order number is: ${lastOrderedCart.orderNum}-->
+		<!-- Hien thi ma so mua hang -->
+		Your order number is: ${lastOrderedCart.orderNum}
 
 	</div>
 
