@@ -1,15 +1,42 @@
 package org.hochnt.springmvcshop.model;
 
 public class OrderDetailInfo {
+	private String id;
 	private String productCode;
-	private String poductName;
-	
+	private String productName;
+
 	private int quanity;
-    private double price;
-    private double amount;
-	
+	private double price;
+	private double amount;
+
 	public OrderDetailInfo() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * Required construc tor for hibernate
+	 * 
+	 * @param productCode
+	 * @param poductName
+	 * @param quanity
+	 * @param price
+	 * @param amount
+	 */
+	public OrderDetailInfo(String id, String productCode, String productName, int quanity, double price, double amount) {
+		this.id = id;
+		this.productCode = productCode;
+		this.productName = productName;
+		this.quanity = quanity;
+		this.price = price;
+		this.amount = amount;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getProductCode() {
@@ -20,12 +47,12 @@ public class OrderDetailInfo {
 		this.productCode = productCode;
 	}
 
-	public String getPoductName() {
-		return poductName;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setPoductName(String poductName) {
-		this.poductName = poductName;
+	public void setProductName(String poductName) {
+		this.productName = poductName;
 	}
 
 	public int getQuanity() {

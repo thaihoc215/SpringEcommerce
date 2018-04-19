@@ -3,6 +3,8 @@ package org.hochnt.springmvcshop.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hochnt.springmvcshop.entity.Order;
+
 public class OrderInfo {
 	private String id;
     private Date orderDate;
@@ -19,6 +21,32 @@ public class OrderInfo {
     public OrderInfo() {
 		// TODO Auto-generated constructor stub
 	}
+
+
+	public OrderInfo(String id, Date orderDate, int orderNum, double amount, String customerName,
+			String customerAddress, String customerEmail, String customerPhone) {
+		this.id = id;
+		this.orderDate = orderDate;
+		this.orderNum = orderNum;
+		this.amount = amount;
+		this.customerName = customerName;
+		this.customerAddress = customerAddress;
+		this.customerEmail = customerEmail;
+		this.customerPhone = customerPhone;
+	}
+
+
+	public OrderInfo(Order order) {
+		this.id = order.getId();
+		this.orderDate = order.getOrderDate();
+		this.orderNum = order.getOrderNum();
+		this.amount = order.getAmount();
+		this.customerName = order.getCustomerName();
+		this.customerAddress = order.getCustomerAddress();
+		this.customerEmail = order.getCustomerEmail();
+		this.customerPhone = order.getCustomerPhone();
+	}
+
 
 	public String getId() {
 		return id;

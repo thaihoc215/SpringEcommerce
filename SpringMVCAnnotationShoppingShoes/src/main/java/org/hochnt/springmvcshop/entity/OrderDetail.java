@@ -24,7 +24,7 @@ public class OrderDetail implements Serializable {
 	private Order order;
 
 	private Product product;
-	private double ammount;
+	private double amount;
 	private double price;
 	private int quanity;
 
@@ -61,12 +61,12 @@ public class OrderDetail implements Serializable {
 	}
 
 	@Column(name = "Amount", nullable = false)
-	public double getAmmount() {
-		return ammount;
+	public double getAmount() {
+		return amount;
 	}
 
-	public void setAmmount(double ammount) {
-		this.ammount = ammount;
+	public void setAmount(double ammount) {
+		this.amount = ammount;
 	}
 
 	@Column(name = "Price", nullable = false)

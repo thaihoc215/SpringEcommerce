@@ -40,6 +40,10 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	/**
+	 * Luu hoac them moi mot san pham
+	 * @param productInfo
+	 */
 	public void save(ProductInfo productInfo) {
 		String code = productInfo.getCode();
 
@@ -49,6 +53,7 @@ public class ProductDAOImpl implements ProductDAO {
 		if (code != null) {
 			product = this.findProduct(code);
 		}
+		//neu khong tim thay san pham => them moi
 		if (product == null) {
 			isNew = true;
 			product = new Product();
@@ -71,7 +76,6 @@ public class ProductDAOImpl implements ProductDAO {
 		if (isNew) {
 			this.sessionFactory.getCurrentSession().persist(product);
 		}
-		// If error in DB, Exceptions will be thrown out immediately
 		// Nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
 		this.sessionFactory.getCurrentSession().flush();
 	}
@@ -83,6 +87,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	//dung cho viec tim kiem san pham voi like name
 	public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
 			String likeName) {
 		String sql = "Select new " + ProductInfo.class.getName() + "(p.code,p.name,p.price)" + "from "
@@ -90,7 +95,7 @@ public class ProductDAOImpl implements ProductDAO {
 		if (likeName != null && likeName.length() > 0) {
 			sql += " Where lower(p.name) like :likeName ";
 		}
-		sql += " order by p.createDate desc ";
+		sql += " order by p.code asc, p.createDate desc ";
 		System.out.println(sql);
 		Session session = sessionFactory.getCurrentSession();
 		Query<?> query = session.createQuery(sql);
