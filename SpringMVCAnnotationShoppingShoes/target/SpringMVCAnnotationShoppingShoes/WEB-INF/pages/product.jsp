@@ -5,11 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>PRODUCT (MANAGER)</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/style.css">
-
 </head>
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
@@ -48,32 +45,10 @@
 				<td><form:errors path="price" class="error-message" /></td>
 			</tr>
 			<tr>
-				<td>Thumbnail Image</td>
-				<td>
-					<!-- <img class="product-img"
-					src="${pageContext.request.contextPath}/productImage?code=${productForm.code}"
-					width="100" /> --> <c:if test="${not empty productForm.code}">
-						<img class="thumbnail-img"
-							src="${pageContext.request.contextPath}/img/${productForm.code}.jpg" />
-					</c:if>
-				</td>
-				<td></td>
-			</tr>
-			<!-- <tr>
-				<td>Upload Thumbnail Image</td>
-				<td><form:input type="file" path="fileDatas" /></td>
-				<td></td>
-			</tr> -->
-			<tr>
 				<td>Image</td>
-				<td>
-					<!-- <img class="product-img"
+				<td><img class="product-img"
 					src="${pageContext.request.contextPath}/productImage?code=${productForm.code}"
-					width="100" /> --> <c:if test="${not empty productForm.code}">
-						<img class="product-img"
-							src="${pageContext.request.contextPath}/img/${productForm.code}.jpg" />
-					</c:if>
-				</td>
+					width="100" /></td>
 				<td></td>
 			</tr>
 			<tr>

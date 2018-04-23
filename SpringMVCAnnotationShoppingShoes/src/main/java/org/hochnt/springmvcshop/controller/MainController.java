@@ -1,6 +1,9 @@
 package org.hochnt.springmvcshop.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
@@ -30,12 +33,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 // Cần thiết để sử dụng RedirectAttributes
 @EnableWebMvc
 public class MainController {
-	 @Autowired
-	//autowired from appcontext bean get from DAO
-	 private OrderDAO orderDAO;
-	
 	@Autowired
-	//autowired from DAO
+	// autowired from appcontext bean get from DAO
+	private OrderDAO orderDAO;
+
+	@Autowired
+	// autowired from DAO
 	private ProductDAO productDAO;
 
 	@RequestMapping("/403")
@@ -49,6 +52,7 @@ public class MainController {
 		return "index";
 	}
 
+	/*------------------------Sản phẩm-------------------------*/
 	// Danh sách sản phẩm.
 	@RequestMapping("/productList")
 	public String listProductHandler(Model model, //
@@ -84,6 +88,38 @@ public class MainController {
 		// Chuyển sang trang danh sách các sản phẩm đã mua.
 		return "redirect:/shoppingCart";
 	}
+
+	// thong tin san pham
+	@RequestMapping(value = { "/productInfo" }, method = RequestMethod.GET)
+	/**
+	 * Xem thong tin san pham
+	 * @param model
+	 * @param code
+	 * @return
+	 */
+	public String productInfoHandler(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+		ProductInfo productInfo = null;
+		
+		if (code != null && code.length() > 0) {
+			productInfo = productDAO.findProductInfo(code);
+		}
+		if(productInfo == null)
+			return "redirect:/productList";
+		model.addAttribute("productForm",productInfo);
+		return "productInfo";
+	}
+	
+	@RequestMapping(value = { "/productInfo" }, method = RequestMethod.POST)
+	/**
+	 * Mua san pham
+	 * @param model
+	 * @param code
+	 * @return
+	 */
+	public String productBuyHandler(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
+		return "redirect:/buyProduct?code=" + code;
+	}
+	/*------------------------Sản phẩm-------------------------*/
 
 	/*---------------------------Giỏ hàng------------------------*/
 	// GET: Hiển thị giỏ hàng.
@@ -197,7 +233,7 @@ public class MainController {
 	public String shoppingCartConfirmationSave(HttpServletRequest request, Model model) {
 
 		CartInfo cartInfo = Utils.getCartInSession(request);
-		
+
 		// kiem tra lai gio hang
 		if (cartInfo.isEmpty())
 			return "redirect:/shoppingCart";
@@ -219,4 +255,18 @@ public class MainController {
 		return "shoppingCartFinalize";
 	}
 	/*---------Xác nhận và thanh toán đơn hàng*/
+
+	@RequestMapping(value = { "/productImage" }, method = RequestMethod.GET)
+	public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam("code") String code) throws IOException {
+		Product product = null;
+		if (code != null) {
+			product = this.productDAO.findProduct(code);
+		}
+		if (product != null && product.getImage() != null) {
+			response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+			response.getOutputStream().write(product.getImage());
+		}
+		response.getOutputStream().close();
+	}
 }

@@ -1,5 +1,7 @@
 package org.hochnt.springmvcshop.dao;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.hochnt.springmvcshop.model.ProductInfo;
@@ -23,7 +25,7 @@ public interface ProductDAO {
 	 * Luu mot san pham
 	 * @param productInfo
 	 */
-	public void save(ProductInfo productInfo);
+	public void save(HttpServletRequest request,ProductInfo productInfo);
 	
 	//Phân trang
 	/**

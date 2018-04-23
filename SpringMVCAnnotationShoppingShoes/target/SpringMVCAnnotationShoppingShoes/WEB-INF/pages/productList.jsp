@@ -8,8 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Shoes Shop Online</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/style.css">
 </head>
@@ -26,19 +24,16 @@
 				<li><a
 					<security:authorize access="hasRole('ROLE_MANAGER')">href="${pageContext.request.contextPath}/product?code=${prInfo.code}"</security:authorize>
 					<security:authorize access="!hasRole('ROLE_MANAGER')">href="${pageContext.request.contextPath}/productInfo?code=${prInfo.code}"</security:authorize>>
-						<!--<img class="product-list-img" alt="View shoes information"
+						<img class="product-list-img" alt="View shoes information"
 						src="${pageContext.request.contextPath}/productImage?code=${prInfo.code}" />
-						 --> <img class="product-list-img" alt="View shoes information"
-						src="${pageContext.request.contextPath}/img/${prInfo.code}.jpg"
-						width="100" />
 				</a></li>
 				<li>Code: ${prInfo.code }</li>
 				<li>Name: ${prInfo.name }</li>
 				<li>Price: <fmt:formatNumber value="${prInfo.price}"
 						type="currency" /></li>
-				<li><security:authorize access="!hasRole('ROLE_MANAGER')"><a
+				<li><a
 					href="${pageContext.request.contextPath }/buyProduct?code=${prInfo.code }">Buy
-						Now</a></security:authorize></li>
+						Now</a></li>
 				<!-- For Manager edit Product -->
 				<security:authorize access="hasRole('ROLE_MANAGER')">
 					<li><a style="color: red;"

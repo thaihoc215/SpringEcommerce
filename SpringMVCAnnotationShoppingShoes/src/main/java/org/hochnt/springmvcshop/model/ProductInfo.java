@@ -11,7 +11,7 @@ public class ProductInfo {
 
 	private boolean newProduct = false;
 	// Upload image file.
-	private CommonsMultipartFile fileData;
+	private CommonsMultipartFile[] fileDatas;
 
 	public ProductInfo() {
 	}
@@ -62,11 +62,11 @@ public class ProductInfo {
 		this.newProduct = newProduct;
 	}
 
-	public CommonsMultipartFile getFileData() {
-		return fileData;
+	public CommonsMultipartFile[] getFileDatas() {
+		return fileDatas;
 	}
 
-	public void setFileData(CommonsMultipartFile fileData) {
-		this.fileData = fileData;
+	public void setFileDatas(CommonsMultipartFile[] fileDatas) {
+		this.fileDatas = fileDatas;
 	}
 }

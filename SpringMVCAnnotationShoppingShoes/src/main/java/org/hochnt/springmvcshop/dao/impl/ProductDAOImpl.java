@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,6 +14,7 @@ import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.hochnt.springmvcshop.model.ProductInfo;
+import org.hochnt.springmvcshop.util.Commons;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +46,7 @@ public class ProductDAOImpl implements ProductDAO {
 	 * Luu hoac them moi mot san pham
 	 * @param productInfo
 	 */
-	public void save(ProductInfo productInfo) {
+	public void save(HttpServletRequest request, ProductInfo productInfo) {
 		String code = productInfo.getCode();
 
 		Product product = null;
@@ -66,12 +68,13 @@ public class ProductDAOImpl implements ProductDAO {
 		product.setPrice(productInfo.getPrice());
 
 		// upload anh cho product
-		if (productInfo.getFileData() != null) {
-			byte[] image = productInfo.getFileData().getBytes();
+		if (productInfo.getFileDatas()[0] != null) {
+			byte[] image = productInfo.getFileDatas()[0].getBytes();
 			if (image != null && image.length > 0) {
 				product.setImage(image);
 			}
 		}
+		Commons.doUploadImage(request, productInfo);
 
 		if (isNew) {
 			this.sessionFactory.getCurrentSession().persist(product);
