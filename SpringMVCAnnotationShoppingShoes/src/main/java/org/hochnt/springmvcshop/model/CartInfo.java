@@ -3,8 +3,6 @@ package org.hochnt.springmvcshop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.sampled.Line;
-
 public class CartInfo {
 	private int orderNum;
 	private CustomerInfo customerInfo;

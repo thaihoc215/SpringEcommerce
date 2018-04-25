@@ -1,8 +1,12 @@
  create table Accounts (
         User_Name varchar(20) not null,
-        Active bit not null,
+        Active boolean NOT NULL,
         Password varchar(20) not null,
         User_Role varchar(20) not null,
+		Name varchar(50) not null,
+		Email varchar(50) not null,
+		Phone_Number varchar(12),
+		Address varchar(200),
         primary key (User_Name)
     );
 

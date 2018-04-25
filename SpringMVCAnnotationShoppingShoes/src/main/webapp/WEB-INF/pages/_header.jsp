@@ -18,6 +18,7 @@
 		<!-- Tạo button login -->
 		 <c:if test="${pageContext.request.userPrincipal.name == null}">
             <a href="${pageContext.request.contextPath}/login">Login</a>
+            <a href="${pageContext.request.contextPath}/signup">Signup</a>
         </c:if>
 	</div>
 </div>

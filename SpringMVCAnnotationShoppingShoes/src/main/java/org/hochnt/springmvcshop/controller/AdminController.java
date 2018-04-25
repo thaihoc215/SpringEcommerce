@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.hochnt.springmvcshop.dao.AccountDAO;
 import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
+import org.hochnt.springmvcshop.entity.Account;
+import org.hochnt.springmvcshop.model.AccountInfo;
 import org.hochnt.springmvcshop.model.OrderDetailInfo;
 import org.hochnt.springmvcshop.model.OrderInfo;
 import org.hochnt.springmvcshop.model.PaginationResult;
@@ -38,12 +41,47 @@ public class AdminController {
 	@Autowired
 	private ProductDAO productDAO;
 
-	// GET: Show Login Page
+	@Autowired
+	private AccountDAO accountDAO;
 	// GET: Hiển thị trang login
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login(Model model) {
 
 		return "login";
+	}
+
+	// GET: Hiển thị trang đăng kí
+	@RequestMapping(value = { "/signup" }, method = RequestMethod.GET)
+	public String signupHandler(Model model) {
+
+		AccountInfo accountInfo = new AccountInfo();
+
+		model.addAttribute("accountInfo", accountInfo);
+		return "signup";
+	}
+
+	// POST: Đăng kí tài khoản
+	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
+	public String signupSaveHandler(Model model, @ModelAttribute("accountInfo") @Validated AccountInfo accountForm, //
+			BindingResult result, //
+			final RedirectAttributes redirectAttributes) {
+
+		// // Nếu validate có lỗi.
+		// if (result.hasErrors()) {
+		// return "signup";
+		// }
+
+		Account accountRegister = null;
+		accountRegister = accountDAO.findAccount(accountForm.getUserName());
+		if(accountRegister == null)
+		try {
+			accountRegister = accountDAO.registerNewUserAccount(accountForm);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			model.addAttribute("errorMessage", "Error " + ex.getMessage());
+			return "signup";
+		}
+		return "redirect:/accountInfo";
 	}
 
 	@RequestMapping(value = { "/accountInfo" }, method = RequestMethod.GET)

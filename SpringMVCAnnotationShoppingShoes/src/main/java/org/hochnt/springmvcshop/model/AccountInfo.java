@@ -1,25 +1,7 @@
-package org.hochnt.springmvcshop.entity;
+package org.hochnt.springmvcshop.model;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
-
-@Entity
-@Table(name = "Accounts")
-public class Account implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8459897282652580017L;
-	public static final String ROLE_MANAGER = "MANAGER";
-	public static final String ROLE_EMPLOYEE = "EMPLOYEE";
-
+public class AccountInfo {
+	
 	private String userName;
 	private boolean active;
 	private String password;
@@ -29,83 +11,69 @@ public class Account implements Serializable {
 	private String email;
 	private String phoneNumber;
 	private String address;
-
-	@Id
-	@Column(name = "User_Name", nullable = false)
+	
+	
+	public AccountInfo() {
+		
+	}
+	
+	public AccountInfo(String userName, boolean active, String password, String userRole, String name, String email,
+			String phoneNumber, String address) {
+		this.userName = userName;
+		this.active = active;
+		this.password = password;
+		this.userRole = userRole;
+		this.name = name;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+	}
 	public String getUserName() {
 		return userName;
 	}
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	
-	@Column(name = "Active", nullable = false)
 	public boolean isActive() {
 		return active;
 	}
-
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	@Column(name = "Password", nullable = false)
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Column(name = "User_Role", nullable = false)
 	public String getUserRole() {
 		return userRole;
 	}
-
 	public void setUserRole(String userRole) {
 		this.userRole = userRole;
 	}
-
-	@Column(name = "Name", nullable = false)
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@Column(name = "Email", nullable = false)
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	@Column(name = "Phone_Number", nullable = true)
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	@Column(name = "Address", nullable = true)
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	@Override
-	public String toString() {
-		return "[" + this.userName + "," + this.password + "," + this.userRole + "]";
 	}
 }

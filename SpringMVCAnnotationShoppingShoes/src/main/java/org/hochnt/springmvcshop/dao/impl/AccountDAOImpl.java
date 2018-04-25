@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hochnt.springmvcshop.dao.AccountDAO;
 import org.hochnt.springmvcshop.entity.Account;
+import org.hochnt.springmvcshop.model.AccountInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,24 @@ public class AccountDAOImpl implements AccountDAO {
 		Object tmp = sess.createQuery(query).uniqueResult();
 		return (Account) tmp;
 
+	}
+
+	@Override
+	public Account registerNewUserAccount(AccountInfo accountForm) {
+		Account account = new Account();
+		account.setUserName(accountForm.getUserName());
+		account.setActive(true);
+		account.setAddress(accountForm.getAddress());
+		account.setEmail(accountForm.getEmail());
+		account.setName(accountForm.getName());
+		account.setPassword(accountForm.getPassword());
+		account.setPhoneNumber(accountForm.getPhoneNumber());
+		account.setUserRole("EMPLOYEE");
+		this.sessionFactory.getCurrentSession().persist(account);
+		// Nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
+		this.sessionFactory.getCurrentSession().flush();
+		
+		return findAccount(account.getUserName());
 	}
 
 }
