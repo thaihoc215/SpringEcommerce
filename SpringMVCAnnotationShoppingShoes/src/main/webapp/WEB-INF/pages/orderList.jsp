@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Product List</title>
+<title>Order List</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
@@ -45,7 +45,7 @@
 						value="${orderInfo.amount}" type="currency" /></td>
 				<td><a
 					href="${pageContext.request.contextPath}/order?orderId=${orderInfo.id}">
-						View</a></td>
+						Details</a></td>
 			</tr>
 		</c:forEach>
 	</table>

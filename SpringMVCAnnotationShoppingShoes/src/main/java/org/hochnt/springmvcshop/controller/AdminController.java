@@ -43,6 +43,8 @@ public class AdminController {
 
 	@Autowired
 	private AccountDAO accountDAO;
+
+	/*-----------------Tài khoản---------------------*/
 	// GET: Hiển thị trang login
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public String login(Model model) {
@@ -73,15 +75,68 @@ public class AdminController {
 
 		Account accountRegister = null;
 		accountRegister = accountDAO.findAccount(accountForm.getUserName());
-		if(accountRegister == null)
-		try {
-			accountRegister = accountDAO.registerNewUserAccount(accountForm);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			model.addAttribute("errorMessage", "Error " + ex.getMessage());
-			return "signup";
-		}
+		if (accountRegister == null)
+			try {
+				accountRegister = accountDAO.registerNewUserAccount(accountForm);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				model.addAttribute("errorMessage", "Error " + ex.getMessage());
+				return "signup";
+			}
 		return "redirect:/accountInfo";
+	}
+
+	// GET: hien thi trang tao tài khoản
+	@RequestMapping(value = { "/createAccount" }, method = RequestMethod.GET)
+	public String createAccount(Model model) {
+		AccountInfo accountInfo = new AccountInfo();
+		model.addAttribute("accountInfo", accountInfo);
+
+		return "createAccount";
+	}
+
+	// POST: tạo tài khoản
+	@RequestMapping(value = { "/createAccount" }, method = RequestMethod.POST)
+	public String createAccountSaveHandler(Model model,
+			@ModelAttribute("accountInfo") @Validated AccountInfo accountForm, //
+			BindingResult result, //
+			final RedirectAttributes redirectAttributes) {
+
+		// // Nếu validate có lỗi.
+		// if (result.hasErrors()) {
+		// return "signup";
+		// }
+
+		Account accountRegister = null;
+		accountRegister = accountDAO.findAccount(accountForm.getUserName());
+		if (accountRegister == null)
+			try {
+				accountRegister = accountDAO.registerNewUserAccount(accountForm);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				model.addAttribute("errorMessage", "Error " + ex.getMessage());
+				return "createAccount";
+			}
+		return "redirect:/";
+	}
+
+	// GET: lay danh sach tai khoan
+	@RequestMapping(value = { "/manageAccount" }, method = RequestMethod.GET)
+	public String manageAccountHandler(Model model, //
+			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
+		int page = 1;
+		try {
+			page = Integer.parseInt(pageStr);
+		} catch (Exception e) {
+		}
+		final int MAX_RESULT = 5;
+		final int MAX_NAVIGATION_PAGE = 10;
+
+		PaginationResult<AccountInfo> paginationResult //
+				= accountDAO.listAccountInfo(page, MAX_RESULT, MAX_NAVIGATION_PAGE);
+
+		model.addAttribute("paginationResult", paginationResult);
+		return "manageAccount";
 	}
 
 	@RequestMapping(value = { "/accountInfo" }, method = RequestMethod.GET)
@@ -97,6 +152,22 @@ public class AdminController {
 
 		return "accountInfo";
 	}
+
+	// GET: thay doi trang thai account
+	@RequestMapping(value = { "/updateAccStatus" }, method = RequestMethod.GET)
+	public String accountStatusChangeHandler(Model model, @RequestParam("userName") String userName) {
+		Account account = null;
+		if (userName != null) {
+			account = this.accountDAO.findAccount(userName);
+		}
+		if (account == null)
+			return "redirect:/manageAccount";
+
+		this.accountDAO.updateAccountStatus(account);
+		return "redirect:/manageAccount";
+
+	}
+	/*-----------------Tài khoản---------------------*/
 
 	/*-------------------------Sản Phẩm-------------------------------*/
 	// GET: Hien thi product
@@ -168,7 +239,7 @@ public class AdminController {
 			orderInfo = this.orderDAO.getOrderInfo(orderId);
 		}
 		if (orderInfo == null)
-			return "redirect/orderList";
+			return "redirect:/orderList";
 
 		List<OrderDetailInfo> details = this.orderDAO.listOrderDetailInfo(orderId);
 		orderInfo.setDetails(details);

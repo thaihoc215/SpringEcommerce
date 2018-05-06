@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="_header.jsp"></jsp:include>
 	<jsp:include page="_menu.jsp" />
-	<div class="page-title">Login (For Employee, Manager)</div>
+	<div class="page-title">Login (For Customer, Employee, Manager)</div>
 	<div class="login-container">
 		<h3>Enter username and password</h3>
 		<br>

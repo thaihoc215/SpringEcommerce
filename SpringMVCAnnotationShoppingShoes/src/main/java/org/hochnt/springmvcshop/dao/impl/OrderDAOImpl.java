@@ -52,7 +52,7 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override
 	public void saveOrder(CartInfo cartInfo) {
 		Session session = sessionFactory.getCurrentSession();
-		int orderNum = getMaxOrderNum();
+		int orderNum = getMaxOrderNum() + 1;
 		Order order = new Order();
 
 		order.setId(UUID.randomUUID().toString());

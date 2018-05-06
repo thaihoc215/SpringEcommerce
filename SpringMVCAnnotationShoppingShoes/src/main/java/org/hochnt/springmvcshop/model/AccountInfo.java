@@ -1,5 +1,7 @@
 package org.hochnt.springmvcshop.model;
 
+import java.util.Date;
+
 public class AccountInfo {
 	
 	private String userName;
@@ -12,13 +14,15 @@ public class AccountInfo {
 	private String phoneNumber;
 	private String address;
 	
+	private Date dateCreate;
+	
 	
 	public AccountInfo() {
 		
 	}
 	
 	public AccountInfo(String userName, boolean active, String password, String userRole, String name, String email,
-			String phoneNumber, String address) {
+			String phoneNumber, String address, Date dateCreate) {
 		this.userName = userName;
 		this.active = active;
 		this.password = password;
@@ -27,6 +31,7 @@ public class AccountInfo {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
+		this.dateCreate = dateCreate;
 	}
 	public String getUserName() {
 		return userName;
@@ -75,5 +80,13 @@ public class AccountInfo {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public Date getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
 	}
 }

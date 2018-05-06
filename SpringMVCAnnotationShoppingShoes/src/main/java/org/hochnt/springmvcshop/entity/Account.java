@@ -1,6 +1,7 @@
 package org.hochnt.springmvcshop.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +20,7 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = -8459897282652580017L;
 	public static final String ROLE_MANAGER = "MANAGER";
 	public static final String ROLE_EMPLOYEE = "EMPLOYEE";
+	public static final String ROLE_CUSTOMER = "CUSTOMER";
 
 	private String userName;
 	private boolean active;
@@ -29,6 +31,7 @@ public class Account implements Serializable {
 	private String email;
 	private String phoneNumber;
 	private String address;
+	private Date dateCreate;
 
 	@Id
 	@Column(name = "User_Name", nullable = false)
@@ -102,6 +105,15 @@ public class Account implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	@Column(name = "Date_Create", nullable = false)
+	public Date getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
 	}
 
 	@Override

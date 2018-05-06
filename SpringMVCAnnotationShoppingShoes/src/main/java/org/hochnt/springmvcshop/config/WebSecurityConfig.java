@@ -35,13 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.csrf().disable();
 
-		// Các yêu cầu phải login với vai trò EMPLOYEE hoặc MANAGER.
+		// Các yêu cầu phải login với vai trò EMPLOYEE, CUSTOMER đã đăng kí hoặc MANAGER.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
 		http.authorizeRequests().antMatchers("/orderList", "/order", "/accountInfo")//
-				.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER')");
+				.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER', 'ROLE_CUSTOMER')");
 
 		// Trang chỉ dành cho MANAGER
-		http.authorizeRequests().antMatchers("/product").access("hasRole('ROLE_MANAGER')");
+		http.authorizeRequests().antMatchers("/product","/createAccount","/manageAccount","/deacAccount").access("hasRole('ROLE_MANAGER')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

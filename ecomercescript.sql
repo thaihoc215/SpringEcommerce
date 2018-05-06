@@ -7,6 +7,7 @@
 		Email varchar(50) not null,
 		Phone_Number varchar(12),
 		Address varchar(200),
+		Date_Create date not null,
         primary key (User_Name)
     );
 
