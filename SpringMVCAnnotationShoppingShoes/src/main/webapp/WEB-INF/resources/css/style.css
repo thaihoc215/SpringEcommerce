@@ -7,9 +7,10 @@ h3 {
 	padding: 0px;
 }
 
-body {
-	max-width: 860px;
-	min-width: 360px;
+body  {
+	
+	/*max-width: 860px;
+	min-width: 360px;*/
 	margin: 0px auto;
 	background: #F8F8F8;
 	padding: 0px 5px;

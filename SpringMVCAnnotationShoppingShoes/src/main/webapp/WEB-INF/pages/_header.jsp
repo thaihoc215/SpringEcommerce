@@ -2,8 +2,11 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/css/bootstrap.min.css">
+
 <div class="header-container">
-	<div class="site-name">Online Shop</div>
+	<div class="site-name">DEMO</div>
 	<div class="header-bar">
 		<!-- hiển thị tên người dùng và link logout nếu tồn tại tài khoản đăng nhập  -->
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
