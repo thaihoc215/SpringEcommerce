@@ -2,6 +2,8 @@ package org.hochnt.springmvcshop.model;
 
 import java.util.Date;
 
+import org.hochnt.springmvcshop.entity.Account;
+
 public class AccountInfo {
 	
 	private String userName;
@@ -15,14 +17,14 @@ public class AccountInfo {
 	private String address;
 	
 	private Date dateCreate;
-	
+	private Date dateUpdated;
 	
 	public AccountInfo() {
 		
 	}
 	
 	public AccountInfo(String userName, boolean active, String password, String userRole, String name, String email,
-			String phoneNumber, String address, Date dateCreate) {
+			String phoneNumber, String address, Date dateCreate, Date dateUpdated) {
 		this.userName = userName;
 		this.active = active;
 		this.password = password;
@@ -32,7 +34,21 @@ public class AccountInfo {
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.dateCreate = dateCreate;
+		this.dateUpdated = dateUpdated;
 	}
+	public AccountInfo(Account account) {
+		this.userName = account.getUserName();
+		this.active = account.isActive();
+		this.password = account.getPassword();
+		this.userRole = account.getUserRole();
+		this.name = account.getName();
+		this.email = account.getEmail();
+		this.phoneNumber = account.getPhoneNumber();
+		this.address = account.getAddress();
+		this.dateCreate = account.getDateCreate();
+		this.dateUpdated = account.getDateUpdated();
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -88,5 +104,13 @@ public class AccountInfo {
 
 	public void setDateCreate(Date dateCreate) {
 		this.dateCreate = dateCreate;
+	}
+
+	public Date getDateUpdate() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdate(Date dateUpdate) {
+		this.dateUpdated = dateUpdate;
 	}
 }

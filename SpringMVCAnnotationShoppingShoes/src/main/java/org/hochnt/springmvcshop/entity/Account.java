@@ -32,6 +32,7 @@ public class Account implements Serializable {
 	private String phoneNumber;
 	private String address;
 	private Date dateCreate;
+	private Date dateUpdated;
 
 	@Id
 	@Column(name = "User_Name", nullable = false)
@@ -114,6 +115,15 @@ public class Account implements Serializable {
 
 	public void setDateCreate(Date dateCreate) {
 		this.dateCreate = dateCreate;
+	}
+
+	@Column(name = "Date_Updated", nullable = false)
+	public Date getDateUpdated() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdated(Date dateUpdated) {
+		this.dateUpdated = dateUpdated;
 	}
 
 	@Override

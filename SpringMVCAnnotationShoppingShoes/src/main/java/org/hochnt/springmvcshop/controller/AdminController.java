@@ -153,6 +153,17 @@ public class AdminController {
 		return "accountInfo";
 	}
 
+	@RequestMapping(value = { "/manageAccountInfo" }, method = RequestMethod.GET)
+	public String mangeAccountInfo(Model model, @RequestParam("userName") String userName) {
+
+		// lấy thông tin người dùng
+		AccountInfo account = accountDAO.findAccountInfo(userName);
+		if (account == null) {// truong hop code sai
+			return "redirect:/manageAccount";
+		}
+		model.addAttribute("userDetails", account);
+		return "manageAccountInfo";
+	}
 	// GET: thay doi trang thai account
 	@RequestMapping(value = { "/updateAccStatus" }, method = RequestMethod.GET)
 	public String accountStatusChangeHandler(Model model, @RequestParam("userName") String userName) {

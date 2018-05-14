@@ -44,6 +44,14 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
+	public AccountInfo findAccountInfo(String userName) {
+		Account account = this.findAccount(userName);
+		if(account ==null)
+			return null;
+		return new AccountInfo(account);
+	}
+
+	@Override
 	public Account registerNewUserAccount(AccountInfo accountForm) {
 		Account account = new Account();
 		account.setUserName(accountForm.getUserName());
@@ -55,25 +63,28 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setPhoneNumber(accountForm.getPhoneNumber());
 		account.setUserRole("CUSTOMER");
 		account.setDateCreate(new Date());
+		account.setDateUpdated(new Date());
 		this.sessionFactory.getCurrentSession().persist(account);
 		// Nếu có lỗi tại DB, ngoại lệ sẽ ném ra ngay lập tức
 		this.sessionFactory.getCurrentSession().flush();
-		
+
 		return findAccount(account.getUserName());
 	}
 
 	@Override
 	/**
 	 * Lay danh sach tai khoan
+	 * 
 	 * @param page
 	 * @param mAX_RESULT
 	 * @param mAX_NAVIGATION_PAGE
 	 * @return
 	 */
 	public PaginationResult<AccountInfo> listAccountInfo(int page, int maxResult, int maxNavigationPage) {
+		// map voi Account info constructor
 		String sql = "Select new " + AccountInfo.class.getName()
 				+ "(acc.userName, acc.active, acc.password, acc.userRole, "
-				+ " acc.name, acc.email, acc.phoneNumber, acc.address,acc.dateCreate) " + " from "
+				+ " acc.name, acc.email, acc.phoneNumber, acc.address,acc.dateCreate,acc.dateUpdated) " + " from "
 				+ Account.class.getName() + " acc " + " order by acc.dateCreate desc, acc.userName asc";
 		Session session = this.sessionFactory.getCurrentSession();
 
@@ -84,12 +95,13 @@ public class AccountDAOImpl implements AccountDAO {
 
 	@Override
 	public void updateAccountStatus(Account account) {
-		if(account.isActive())
+		if (account.isActive())
 			account.setActive(false);
 		else
 			account.setActive(true);
+		account.setDateUpdated(new Date());
 		this.sessionFactory.getCurrentSession().saveOrUpdate(account);
-		
+
 	}
 
 }

@@ -21,24 +21,28 @@
 			<table>
 				<tr>
 					<td><label for="name">Name</label> *</td>
-					<td><form:input path="name" class="form-control" /></td>
+					<td><form:input path="name" class="form-control"
+							required="required" /></td>
 					<td><form:errors path="name" class="error-message" /></td>
 				</tr>
 				<tr>
 					<td><label for="email">Email *</label></td>
-					<td><form:input path="email" class="form-control" /></td>
+					<td><form:input path="email" class="form-control"
+							required="required" /></td>
 					<td><form:errors path="email" class="error-message" /></td>
 				</tr>
 				<tr>
 					<td><label for="phone">Phone *</label></td>
-					<td><form:input path="phone" class="form-control" /></td>
+					<td><form:input path="phone" class="form-control"
+							required="required" /></td>
 					<td><form:errors path="phone" class="error-message" /></td>
 				</tr>
 
 				<tr>
 
 					<td><label for="address">Address *</label></td>
-					<td><form:input path="address" class="form-control" /></td>
+					<td><form:input path="address" class="form-control"
+							required="required" /></td>
 					<td><form:errors path="address" class="error-message" /></td>
 				</tr>
 				<tr>

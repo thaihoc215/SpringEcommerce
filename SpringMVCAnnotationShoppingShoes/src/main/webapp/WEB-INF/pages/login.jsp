@@ -34,12 +34,15 @@
 					<tr>
 						<td><label for="userName" class="control-label">User
 								Name*</label></td>
-						<td><input name="userName" class="form-control"></td>
+						<td><input name="userName" class="form-control"
+							required="required"
+							></td>
 					</tr>
 					<tr>
 						<td><label for="password" class="control-label">Password*</label></td>
 						<td><input type="password" name="password"
-							class="form-control"></td>
+							class="form-control" required="required"
+							></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>

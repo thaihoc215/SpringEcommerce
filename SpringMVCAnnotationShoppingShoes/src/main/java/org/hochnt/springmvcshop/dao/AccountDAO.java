@@ -7,6 +7,7 @@ import org.hochnt.springmvcshop.model.PaginationResult;
 public interface AccountDAO {
 	public Account findAccount(String userName);
 
+	public AccountInfo findAccountInfo(String userName);
 	/**
 	 * dang ki tai khoan cho khach hang
 	 * @param accountForm

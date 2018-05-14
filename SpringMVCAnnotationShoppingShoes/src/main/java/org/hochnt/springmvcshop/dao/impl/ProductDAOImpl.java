@@ -66,6 +66,7 @@ public class ProductDAOImpl implements ProductDAO {
 		product.setCode(code);
 		product.setName(productInfo.getName());
 		product.setPrice(productInfo.getPrice());
+		product.setDateUpdated(new Date());
 
 		// upload anh cho product
 		if (productInfo.getFileDatas()[0] != null) {

@@ -33,6 +33,8 @@ public class Product implements Serializable {
 	// For sort.
 	private Date createDate;
 
+	private Date dateUpdated;
+
 	@Id
 	@Column(name = "Code", nullable = false)
 	public String getCode() {
@@ -79,5 +81,14 @@ public class Product implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+	
+	@Column(name = "Date_Updated", nullable = false)
+	public Date getDateUpdated() {
+		return dateUpdated;
+	}
+
+	public void setDateUpdated(Date dateUpdated) {
+		this.dateUpdated = dateUpdated;
 	}
 }

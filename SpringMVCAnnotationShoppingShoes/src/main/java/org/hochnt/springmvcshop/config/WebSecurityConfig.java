@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.access("hasAnyRole('ROLE_EMPLOYEE', 'ROLE_MANAGER', 'ROLE_CUSTOMER')");
 
 		// Trang chỉ dành cho MANAGER
-		http.authorizeRequests().antMatchers("/product","/createAccount","/manageAccount","/deacAccount").access("hasRole('ROLE_MANAGER')");
+		http.authorizeRequests().antMatchers("/product","/createAccount","/manageAccount","/manageAccountInfo","/deacAccount").access("hasRole('ROLE_MANAGER')");
 
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

@@ -8,6 +8,7 @@
 		Phone_Number varchar(12),
 		Address varchar(200),
 		Date_Create date not null,
+		Date_Updated date not null,
         primary key (User_Name)
     );
 
@@ -39,6 +40,7 @@ create table Order_Details (
         Image BYTEA,
         Name varchar(255) not null,
         Price double precision not null,
+		Date_Updated date not null,
         primary key (Code)
     );
  

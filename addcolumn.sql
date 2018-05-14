@@ -1,0 +1,2 @@
+ALTER TABLE accounts ADD COLUMN date_updated date NOT NULL DEFAULT '2017-05-13';
+ALTER TABLE products ADD COLUMN date_updated date NOT NULL DEFAULT '2017-05-13';

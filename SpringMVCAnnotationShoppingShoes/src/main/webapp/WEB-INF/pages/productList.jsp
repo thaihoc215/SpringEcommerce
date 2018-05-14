@@ -38,7 +38,8 @@
 					<security:authorize access="!hasRole('ROLE_MANAGER')">
 						<li><a class="btn btn-primary"
 							href="${pageContext.request.contextPath }/buyProduct?code=${prInfo.code }">Buy
-								Now</a></li>
+								Now</a> <a class="btn btn-primary"
+							href="${pageContext.request.contextPath }/productInfo?code=${prInfo.code }">Info</a></li>
 					</security:authorize>
 					<!-- For Manager edit Product -->
 					<security:authorize access="hasRole('ROLE_MANAGER')">

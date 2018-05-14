@@ -48,7 +48,7 @@
 					<td><fmt:formatDate value="${accountInfo.dateCreate}"
 							pattern="dd-MM-yyyy HH:mm" /></td>
 					<td><a class="btn btn-info"
-						href="${pageContext.request.contextPath}/order?orderId=${accountInfo.userName}">
+						href="${pageContext.request.contextPath}/manageAccountInfo?userName=${accountInfo.userName}">
 							Info</a></td>
 					<td><c:if test="${accountInfo.active == 'false'}">
 							<a class="btn btn-danger"
