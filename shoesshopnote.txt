@@ -1,0 +1,94 @@
+config login ( check username and password)
+account info page
+
+
+mua sản phẩm => lưu vào session => hiển thị danh sách sản phẩm đã mua => fix add so luong san pham sai vao gio hang=>xoa san pham ra khoi gio hang
+=>cap nhat quantity cho san pham trong gio hang (button click) =>controller di chuyen toi man hinh nhap thong tin khach hang=> view nhap thong tin khach hang
+=>Luu + cap nhat => thong tin khach hang vao session (chua thuc hien check validate)
+
+16/04
+-chưa tạo check error, chua luu thanh toan don hang vao database + xoa cart ra khoi session va luu so thu tu order
+Tạo method post khi nhấn gửi thông tin khách hàng lúc mua hàng => di chuyển tới màn hình xác nhận mua hàng (shoppingcartconfirm) => them ham lay tong sotien (total amount) va tong so luong(total quantity)
+=> tao giao dien man hinh mua hang (Thong tin khach, thong tin thanh toan, chi tiet gio hang) => di chuyen toi
+17/04
+xoa cart ra khoi session + luu lastorder cart vao session
+tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang 
+ <form:hidden path="cartLines[${varStatus.index}].productInfo.code" />	
+ 
+ 18/04
+ tạo controller product cho admin (tạo mới ở trang chủ và edit ở trang product list)
+ => tạo view product cho admin để hiển thị thông tin product (mode edit và tạo mới)
+ => luu thong tin product va tao product vao database
+
+ 
+ 19/04:
+ Sửa lỗi không hiển thị được orderlist(not have constructor)
+ Controler for view orderlist of admin (page) => tao view cho danh sach order (orderlist.jsp)
+ =>Controler view chi tiet don hang of admin => dao: lay thong tin don hang, chi tiet don hang(ds san pham)
+ =>tao view cho thong tin don hang + chi tiet don hang (order.jsp)
+ 
+ 21/04:
+ Create controller + view show product info via codeId
+ tao them field luu duong dan cho product => cap nhat trong daoImpl=> su dung files
+ resources\img\S002
+ 
+ 22/04:
+ - add img to folder
+ - add css boostrap
+ - customize image upload (500 x 500 .jpg)
+ - change path show image in jsp file to folder instead of load from byte in database
+ - remove buy item for Admin
+ 
+ 25/04:
+ - Edit database for account design
+ - Edit entity for account
+ - Add Account info class
+ - Add Signup view (signup.jsp)
+ - Create controller Get direct to signup (Admin Controller)
+ - Create controller POST Signup => process logic to add account to database
+ - Done feature Signup
+
+ 06/05:
+ 
+ - set role for CUSTOMER
+ - edit signup account to CUSTOMER
+ - add feature create account for admin
+	+ create view createAccount.jsp
+	+ create controller createAccount (admin controller)
+ - add created date for account and accountinfo
+ - add feature manageAccount
+	+ create view manage account
+	+ create controller manageAccount
+ - active/deactive account in manageAccount
+14/05
+- update bootstrap for component all pages
+- set boostrap css and js to local
+- add jquery
+15/05:
+ - update time lastupdate cho table Account + Product (add column dateUpdated sql script)
+ - update sql add/save last dateupdate Account + product
+ - add button info for product in product list
+ - show/update account info in manageAccount
+ 16/05:
+ - edit show and update account info
+ Note: 
+ - show/update account info in manageAccount
+ - set role for update account info
+ - update self account info
+ - Remove product
+ - lay gia tri phan quyen tu combobox len controller
+ - tạo phân quyền (combobox) cho chức năng quản lý nhân viên
+ - Check validate cho signup (thông báo lỗi khi đã tồn tại tài khoản)
+ - tạo account có phân quyền là CUSTOMER
+ - chuyển thông tin của người dùng đã đăng kí vào thông tin người dùng lúc mua hàng (logged in)
+ - tạo thumbnailImg 
+ - tạo list image cho sản phảm
+ - thay đổi ảnh sản phẩm khi chọn file(chưa save)
+ - refresh ảnh sản phẩm sau khi 
+ - chưa tùy chỉnh độ maximum ảnh
+ - chưa tạo check error cho đơn hàng
+ - chưa lưu ảnh lên server => đang lưu vào byte
+ - set size image khi upload
+ - tạo chức năng confirm email khi đăng kí
+ - tạo lịch sử giao dịch của một tài khoản
+ - update phan quyen cho tat ca cac page

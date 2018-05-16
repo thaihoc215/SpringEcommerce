@@ -16,6 +16,7 @@ import org.hochnt.springmvcshop.model.AccountInfo;
 import org.hochnt.springmvcshop.model.OrderInfo;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 //Transactional for Hibernate
@@ -102,6 +103,30 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setDateUpdated(new Date());
 		this.sessionFactory.getCurrentSession().saveOrUpdate(account);
 
+	}
+
+	
+	@Override
+	/**
+	 * Thay doi thong tin nguoi dung
+	 */
+	public void saveAccountInfo(AccountInfo accountInfo) {
+		String userName = accountInfo.getUserName();
+		
+		Account account = null;
+		
+		if(userName!=null && userName.length() > 0)
+			account = this.findAccount(userName);
+		
+		account.setDateUpdated(new Date());
+		account.setEmail(accountInfo.getEmail());
+		account.setAddress(accountInfo.getAddress());
+		account.setName(accountInfo.getName());
+		account.setPassword(accountInfo.getPassword());
+		//account.setUserRole(userDetails.getUserRole());
+		account.setPhoneNumber(accountInfo.getPhoneNumber());
+		
+		this.sessionFactory.getCurrentSession().flush();
 	}
 
 }

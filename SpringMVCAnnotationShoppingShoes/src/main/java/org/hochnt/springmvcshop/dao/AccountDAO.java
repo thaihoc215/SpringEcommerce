@@ -25,4 +25,10 @@ public interface AccountDAO {
 	public PaginationResult<AccountInfo> listAccountInfo(int page, int maxResult, int maxNavigationPage);
 
 	public void updateAccountStatus(Account account);
+
+	/**
+	 * Thay doi thong tin nguoi dung
+	 * @param userDetails
+	 */
+	public void saveAccountInfo(AccountInfo accountInfo);
 }

@@ -161,9 +161,27 @@ public class AdminController {
 		if (account == null) {// truong hop code sai
 			return "redirect:/manageAccount";
 		}
-		model.addAttribute("userDetails", account);
+		model.addAttribute("accountInfo", account);
 		return "manageAccountInfo";
 	}
+
+	@RequestMapping(value = { "/manageAccountInfo" }, method = RequestMethod.POST)
+	@Transactional(propagation = Propagation.NEVER)
+	public String mangeAccountInfoUpdate(Model model, @ModelAttribute("accountInfo") @Validated AccountInfo accountInfo, //
+			BindingResult result, //
+			final RedirectAttributes redirectAttributes) {
+
+		try {
+			accountDAO.saveAccountInfo(accountInfo);
+		} catch (Exception e) {
+			String message = e.getMessage();
+			model.addAttribute("message", message);
+			// Show product form.
+			return "manageAccountInfo";
+		}
+		return "redirect:/manageAccount";
+	}
+
 	// GET: thay doi trang thai account
 	@RequestMapping(value = { "/updateAccStatus" }, method = RequestMethod.GET)
 	public String accountStatusChangeHandler(Model model, @RequestParam("userName") String userName) {
@@ -198,7 +216,7 @@ public class AdminController {
 
 	// POST: Save product
 	@RequestMapping(value = { "/product" }, method = RequestMethod.POST)
-	// Tránh ngoại lệ: UnexpectedRollbackException (Xem giải thích thêm).
+	// Tránh ngoại lệ: UnexpectedRollbackException
 	@Transactional(propagation = Propagation.NEVER)
 	public String productSave(HttpServletRequest request, Model model, //
 			@ModelAttribute("productForm") @Validated ProductInfo productInfo, //
