@@ -71,20 +71,27 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
  - show/update account info in manageAccount
  16/05:
  - edit show and update account info
- Note: 
- - show/update account info in manageAccount
- - set role for update account info
+ 
+18/05:
+ - get role from view to controler createAccount
+ - pass role view <=> controler show/update accountInfo
  - update self account info
- - Remove product
- - lay gia tri phan quyen tu combobox len controller
- - tạo phân quyền (combobox) cho chức năng quản lý nhân viên
+	+ edit view accountInfo.jsp
+	+ add controller accountInfo (POST) to update account
+ - remove product	
+ Note: 
+
+ - find product
+ - add column size for product - order detail
  - Check validate cho signup (thông báo lỗi khi đã tồn tại tài khoản)
- - tạo account có phân quyền là CUSTOMER
  - chuyển thông tin của người dùng đã đăng kí vào thông tin người dùng lúc mua hàng (logged in)
+ - add gender for account
+ - confirm change password for update self accountinfo
+ - show message confirm update for all form update information and message success/failed after update
  - tạo thumbnailImg 
  - tạo list image cho sản phảm
  - thay đổi ảnh sản phẩm khi chọn file(chưa save)
- - refresh ảnh sản phẩm sau khi 
+ - refresh ảnh sản phẩm sau khi chọn ảnh sản phẩm
  - chưa tùy chỉnh độ maximum ảnh
  - chưa tạo check error cho đơn hàng
  - chưa lưu ảnh lên server => đang lưu vào byte

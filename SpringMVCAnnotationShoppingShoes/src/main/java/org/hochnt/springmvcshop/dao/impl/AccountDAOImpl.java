@@ -11,12 +11,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.hochnt.springmvcshop.dao.AccountDAO;
 import org.hochnt.springmvcshop.entity.Account;
-import org.hochnt.springmvcshop.entity.Order;
 import org.hochnt.springmvcshop.model.AccountInfo;
-import org.hochnt.springmvcshop.model.OrderInfo;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 //Transactional for Hibernate
@@ -62,7 +59,7 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setName(accountForm.getName());
 		account.setPassword(accountForm.getPassword());
 		account.setPhoneNumber(accountForm.getPhoneNumber());
-		account.setUserRole("CUSTOMER");
+		account.setUserRole(accountForm.getUserRole());
 		account.setDateCreate(new Date());
 		account.setDateUpdated(new Date());
 		this.sessionFactory.getCurrentSession().persist(account);
@@ -123,7 +120,7 @@ public class AccountDAOImpl implements AccountDAO {
 		account.setAddress(accountInfo.getAddress());
 		account.setName(accountInfo.getName());
 		account.setPassword(accountInfo.getPassword());
-		//account.setUserRole(userDetails.getUserRole());
+		account.setUserRole(accountInfo.getUserRole());
 		account.setPhoneNumber(accountInfo.getPhoneNumber());
 		
 		this.sessionFactory.getCurrentSession().flush();

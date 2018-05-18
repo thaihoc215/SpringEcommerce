@@ -59,7 +59,7 @@ public class MainController {
 			@RequestParam(value = "name", defaultValue = "") String likeName,
 			@RequestParam(value = "page", defaultValue = "1") int page) {
 
-		final int maxResult = 5;// hien thi toi da 5 san pham 1 tran
+		final int maxResult = 8;// hien thi toi da 5 san pham 1 tran
 		final int maxNavigationPage = 10;// hien thi toi da 10 trang mot lan
 
 		// lay ket qua phan trang va dua vao paginationProduct tren view

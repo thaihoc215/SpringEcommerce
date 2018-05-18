@@ -10,42 +10,50 @@
 	href="${pageContext.request.contextPath }/css/style.css">
 </head>
 <body>
-	<jsp:include page="_header.jsp"></jsp:include>
-	<jsp:include page="_menu.jsp" />
-	<div class="page-title">Customer Information</div>
+	<div class="cointainer-fluid">
+		<jsp:include page="_header.jsp"></jsp:include>
+		<jsp:include page="_menu.jsp" />
+		<div class="row page-title">Customer Information</div>
 
-	<form:form modelAttribute="customerForm"
-		action="${pageContext.request.contextPath}/shoppingCartCustomer"
-		method="POST">
-		<table>
-			<tr>
-				<td>Name *</td>
-				<td><form:input path="name" /></td>
-				<td><form:errors path="name" class="error-message" /></td>
-			</tr>
-			<tr>
-				<td>Email *</td>
-				<td><form:input path="email" /></td>
-				<td><form:errors path="email" class="error-message" /></td>
-			</tr>
-			<tr>
-				<td>Phone *</td>
-				<td><form:input path="phone" /></td>
-				<td><form:errors path="phone" class="error-message" /></td>
-			</tr>
+		<form:form modelAttribute="customerForm"
+			action="${pageContext.request.contextPath}/shoppingCartCustomer"
+			method="POST">
+			<table>
+				<tr>
+					<td><label for="name">Name</label> *</td>
+					<td><form:input path="name" class="form-control"
+							required="required" /></td>
+					<td><form:errors path="name" class="error-message" /></td>
+				</tr>
+				<tr>
+					<td><label for="email">Email *</label></td>
+					<td><form:input path="email" class="form-control"
+							required="required" /></td>
+					<td><form:errors path="email" class="error-message" /></td>
+				</tr>
+				<tr>
+					<td><label for="phone">Phone *</label></td>
+					<td><form:input path="phone" class="form-control"
+							required="required" /></td>
+					<td><form:errors path="phone" class="error-message" /></td>
+				</tr>
 
-			<tr>
-				<td>Address *</td>
-				<td><form:input path="address" /></td>
-				<td><form:errors path="address" class="error-message" /></td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><input type="submit" value="Submit" /> <input type="reset"
-					value="Reset" /></td>
-			</tr>
-		</table>
-	</form:form>
-	<jsp:include page="_footer.jsp" />
+				<tr>
+
+					<td><label for="address">Address *</label></td>
+					<td><form:input path="address" class="form-control"
+							required="required" /></td>
+					<td><form:errors path="address" class="error-message" /></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="submit" class="btn btn-primary"
+						value="Submit" /> <input type="reset" class="btn btn-warning"
+						value="Reset" /></td>
+				</tr>
+			</table>
+		</form:form>
+		<jsp:include page="_footer.jsp" />
+	</div>
 </body>
 </html>

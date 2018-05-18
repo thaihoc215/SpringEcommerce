@@ -16,36 +16,34 @@
 			<table>
 				<tr>
 					<td><label for="userName" class="control-label">User
-							Name*</label></td>
-					<td><form:input path="userName" class="form-control"
-							required="required" /></td>
+							User Name*</label></td>
+					<td><form:input path="userName" class="form-control" /></td>
 					<td><form:errors path="userName" class="error-message" /></td>
 				</tr>
 				<tr>
 					<td><label for="email" class="control-label">Email*</label></td>
-					<td><form:input path="email" class="form-control" required="required"/></td>
+					<td><form:input path="email" class="form-control" /></td>
 					<td><form:errors path="email" class="error-message" /></td>
 				</tr>
 				<tr>
-					<td><label for="name" class="control-label" >Name*</label></td>
-					<td><form:input path="name" class="form-control" required="required"/></td>
+					<td><label for="name" class="control-label">Name*</label></td>
+					<td><form:input path="name" class="form-control" /></td>
 					<td><form:errors path="name" class="error-message" /></td>
 				</tr>
 				<tr>
 					<td><label for="password" class="control-label">Password*</label></td>
-					<td><form:input path="password" type="password" required="required"
+					<td><form:input path="password" type="password"
 							class="form-control" /></td>
 					<td><form:errors path="password" class="error-message" /></td>
 				</tr>
 				<tr>
 					<td><label for="roles">Role</label></td>
-					<td><form:select name="roles" class="form-control"
-							path="userRole" required="required">
+					<td><select name="roles" class="form-control">
 							<option value="" selected></option>
 							<option value="CUSTOMER">CUSTOMER</option>
 							<option value="EMPLOYEE">EMPLOYEE</option>
 							<option value="MANAGER">MANAGER</option>
-						</form:select></td>
+					</select></td>
 				</tr>
 				<tr>
 					<td><label for="phoneNumber" class="control-label">Phone

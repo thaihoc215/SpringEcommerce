@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// auth.inMemoryAuthentication().withUser("admin1").password("12345").roles("USER,
 		// ADMIN");
 
-		// Các User trong Database
+		// Các User trong Database => load danh sach user vao tai day
 		auth.userDetailsService(myDBAauthenticationService);
 
 	}
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				// Submit URL của trang login
 				.loginProcessingUrl("/j_spring_security_check") // Submit URL
-				.loginPage("/login")//
+				.loginPage("/login")// => di chuyen den dbauthention de get account
 				.defaultSuccessUrl("/accountInfo")//login thanh cong sau khi nhan method post thi chuyen toi account infor
 				.failureUrl("/login?error=true")//
 				.usernameParameter("userName")//

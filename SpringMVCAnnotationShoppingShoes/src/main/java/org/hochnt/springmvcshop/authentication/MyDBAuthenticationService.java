@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hochnt.springmvcshop.dao.AccountDAO;
-import org.hochnt.springmvcshop.dao.OrderDAO;
-import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -42,17 +39,17 @@ public class MyDBAuthenticationService implements UserDetailsService {
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
 
 		grantList.add(authority);
+		/*
+		 * boolean enabled = account.isActive(); boolean accountNonExpired = true;
+		 * boolean credentialsNonExpired = true; boolean accountNonLocked = true;
+		 */
 
-		boolean enabled = account.isActive();
-		boolean accountNonExpired = true;
-		boolean credentialsNonExpired = true;
-		boolean accountNonLocked = true;
+		// UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
+		// account.getPassword(), enabled, accountNonExpired, //
+		// credentialsNonExpired, accountNonLocked, grantList);
 
-//		 UserDetails userDetails = (UserDetails) new User(account.getUserName(), //
-//		 account.getPassword(), enabled, accountNonExpired, //
-//		 credentialsNonExpired, accountNonLocked, grantList);
-
-		UserDetails userDetails = User.withUsername(account.getUserName()).password("{noop}" + account.getPassword()).roles(role).build();
+		UserDetails userDetails = User.withUsername(account.getUserName()).password("{noop}" + account.getPassword())
+				.roles(role).build();
 		return userDetails;
 	}
 

@@ -57,24 +57,25 @@ create table Order_Details (
         foreign key (PRODUCT_ID)
         references Products (Code);
 
-insert into Accounts (USER_NAME, ACTIVE, PASSWORD, USER_ROLE)
-values ('employee1', '1', '123', 'EMPLOYEE');
+--insert data Accounts
+insert into Accounts (user_name, active, password, user_role, name, email, phone_number, address, date_create, date_updated)
+values ('employee1', '1', '123', 'EMPLOYEE','thaihoc1','thaihoc2105@gmail.com','01223410987','address1','2017-07-07','2017-07-07');
+
+insert into Accounts (user_name, active, password, user_role, name, email, phone_number, address, date_create, date_updated)
+values ('manager1', '1', '123', 'MANAGER','thaihoc2','thaihoc2105@gmail.com','01223410987','address2','2017-07-07','2017-07-07');
  
-insert into Accounts (USER_NAME, ACTIVE, PASSWORD, USER_ROLE)
-values ('manager1', '1', '123', 'MANAGER');
+--insert data Products
+INSERT INTO public.products(code, name, price,create_date, date_updated)
+VALUES ('S001', 'Core Java', 100, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
  
-----------------
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S001', 'Core Java', 100, CURRENT_TIMESTAMP  );
- 
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S002', 'Spring for Beginners', 50, CURRENT_TIMESTAMP  );
- 
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S003', 'Swift for Beginners', 120, CURRENT_TIMESTAMP  );
- 
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S004', 'Oracle XML Parser', 120, CURRENT_TIMESTAMP  );
- 
-insert into products (CODE, NAME, PRICE, CREATE_DATE)
-values ('S005', 'CSharp Tutorial for Beginers', 110, CURRENT_TIMESTAMP  );
+INSERT INTO public.products(code, name, price,create_date, date_updated)
+VALUES ('S002', 'Spring for Beginners', 50, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+INSERT INTO public.products(code, name, price,create_date, date_updated)
+VALUES ('S003', 'Swift for Beginners', 120, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+INSERT INTO public.products(code, name, price,create_date, date_updated)
+VALUES ('S004', 'Oracle XML Parser', 120, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+INSERT INTO public.products(code, name, price,create_date, date_updated)
+VALUES ('S005', 'CSharp Tutorial for Beginers', 110, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);

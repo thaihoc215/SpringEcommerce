@@ -1,5 +1,6 @@
 package org.hochnt.springmvcshop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -117,7 +118,7 @@ public class AdminController {
 				model.addAttribute("errorMessage", "Error " + ex.getMessage());
 				return "createAccount";
 			}
-		return "redirect:/";
+		return "redirect:/manageAccount";
 	}
 
 	// GET: lay danh sach tai khoan
@@ -144,13 +145,30 @@ public class AdminController {
 
 		// lấy thông tin người dùng đăng nhập
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println(userDetails.getPassword());
-		System.out.println(userDetails.getUsername());
-		System.out.println(userDetails.isEnabled());
-
-		model.addAttribute("userDetails", userDetails);
+		/*
+		 * System.out.println(userDetails.getPassword());
+		 * System.out.println(userDetails.getUsername());
+		 * System.out.println(userDetails.isEnabled());
+		 */
+		AccountInfo accountInfo = null;
+		accountInfo = accountDAO.findAccountInfo(userDetails.getUsername());
+		model.addAttribute("accountInfo", accountInfo);
+		// model.addAttribute("userDetails", userDetails);
 
 		return "accountInfo";
+	}
+
+	@RequestMapping(value = { "/accountInfo" }, method = RequestMethod.POST)
+	@Transactional(propagation = Propagation.NEVER)
+	public String accountInfoUpdate(Model model, @ModelAttribute("accountInfo") @Validated AccountInfo accountInfo) {
+
+		try {
+			accountDAO.saveAccountInfo(accountInfo);
+		} catch (Exception e) {
+			String message = e.getMessage();
+			model.addAttribute("message", message);
+		}
+		return "redirect:/accountInfo";
 	}
 
 	@RequestMapping(value = { "/manageAccountInfo" }, method = RequestMethod.GET)
@@ -158,6 +176,12 @@ public class AdminController {
 
 		// lấy thông tin người dùng
 		AccountInfo account = accountDAO.findAccountInfo(userName);
+		List<String> roles = new ArrayList<String>();
+		roles.add("CUSTOMER");
+		roles.add("EMPLOYEE");
+		roles.add("MANAGER");
+
+		model.addAttribute("roles", roles);
 		if (account == null) {// truong hop code sai
 			return "redirect:/manageAccount";
 		}
@@ -167,16 +191,15 @@ public class AdminController {
 
 	@RequestMapping(value = { "/manageAccountInfo" }, method = RequestMethod.POST)
 	@Transactional(propagation = Propagation.NEVER)
-	public String mangeAccountInfoUpdate(Model model, @ModelAttribute("accountInfo") @Validated AccountInfo accountInfo, //
-			BindingResult result, //
-			final RedirectAttributes redirectAttributes) {
+	public String mangeAccountInfoUpdate(Model model,
+			@ModelAttribute("accountInfo") @Validated AccountInfo accountInfo) {
 
 		try {
 			accountDAO.saveAccountInfo(accountInfo);
 		} catch (Exception e) {
 			String message = e.getMessage();
 			model.addAttribute("message", message);
-			// Show product form.
+			// Show accountinfo form
 			return "manageAccountInfo";
 		}
 		return "redirect:/manageAccount";

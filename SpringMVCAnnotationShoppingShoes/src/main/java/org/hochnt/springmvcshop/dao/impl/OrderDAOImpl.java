@@ -8,14 +8,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
-import org.hochnt.springmvcshop.entity.Account;
 import org.hochnt.springmvcshop.entity.Order;
 import org.hochnt.springmvcshop.entity.OrderDetail;
 import org.hochnt.springmvcshop.entity.Product;

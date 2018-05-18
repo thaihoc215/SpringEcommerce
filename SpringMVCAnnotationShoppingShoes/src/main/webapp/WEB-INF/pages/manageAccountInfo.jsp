@@ -22,28 +22,35 @@
 					</tr>
 					<tr>
 						<td><label for="email" class="control-label">Email*</label></td>
-						<td><form:input path="email" class="form-control" /></td>
+						<td><form:input path="email" class="form-control"
+								required="required" /></td>
 						<td><form:errors path="email" class="error-message" /></td>
 					</tr>
 					<tr>
 						<td><label for="name" class="control-label">Name*</label></td>
-						<td><form:input path="name" class="form-control" /></td>
+						<td><form:input path="name" class="form-control"
+								required="required" /></td>
 						<td><form:errors path="name" class="error-message" /></td>
 					</tr>
 					<tr>
 						<td><label for="password" class="control-label">Password*</label></td>
 						<td><form:input path="password" type="password"
-								class="form-control" /></td>
+								class="form-control" required="required" /></td>
 						<td><form:errors path="password" class="error-message" /></td>
 					</tr>
 					<tr>
 						<td><label for="roles">Role</label></td>
-						<td><select name="roles" class="form-control">
+						<td><form:select name="roles" class="form-control"
+								path="userRole" itemValue="userRole" itemLabel="userRole"
+								required="required">
 								<option value="" selected></option>
+								<!-- 
 								<option value="CUSTOMER">CUSTOMER</option>
 								<option value="EMPLOYEE">EMPLOYEE</option>
 								<option value="MANAGER">MANAGER</option>
-						</select></td>
+								 -->
+								<form:options items="${roles}"></form:options>
+							</form:select></td>
 					</tr>
 					<tr>
 						<td><label for="phoneNumber" class="control-label">Phone
