@@ -21,29 +21,33 @@
 
 		<div class="row">
 			<c:forEach items="${paginationProducts.list }" var="prInfo">
-				<div class="product-preview-container innercard">
-					<div class="image">
-						<a
-							href="${pageContext.request.contextPath}/productInfo?code=${prInfo.code}">
-							<img class="product-list-img show" alt="View shoes information"
-							src="${pageContext.request.contextPath}/img/${prInfo.code}.jpg" />
-						</a>
-					</div>
-					<div class="product-info-wrapper">
-						<div class="product-info-inner clear clearfix">
-							<div class="color-count cta-link">9 colors</div>
-						</div>
-						<div class="hc-separator line-dotted-light divider-hor-top"></div>
-						<div class="product-info-inner-content clearfix with-badges">
+				<div class="hockeycard">
+					<div class="innercard">
+						<div class="image">
 							<a
-								href="${pageContext.request.contextPath}/productInfo?code=${prInfo.code}"
-								class="link-CQ2627 product-link clearfix "> <span
-								class="title">Deerupt Runner Shoes</span> <span class="subtitle">Men's
-									Originals</span>
+								href="${pageContext.request.contextPath}/productInfo?code=${prInfo.code}">
+								<img class="product-list-img show" alt="View shoes information"
+								src="${pageContext.request.contextPath}/img/${prInfo.code}.jpg" />
 							</a>
 						</div>
-					</div>
+						<div class="product-info-wrapper">
+							<div class="hc-separator line-dotted-light divider-hor-top"></div>
+							<div class="clearfix">
+								<a
+									href="${pageContext.request.contextPath}/productInfo?code=${prInfo.code}"
+									class="product-link clearfix "> <span class="title">${prInfo.name }</span>
+								</a>
+							</div>
+							<div class="clearfix">
+								<div class="price">
+									<!--<fmt:formatNumber value="${prInfo.price}" type="currency" />-->
+									<span class="currency-sign"> $ </span> <span class="salesprice">
+										${prInfo.price} </span>
+								</div>
+							</div>
+						</div>
 
+					</div>
 				</div>
 			</c:forEach>
 		</div>

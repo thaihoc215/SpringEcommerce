@@ -1,5 +1,6 @@
 package org.hochnt.springmvcshop.model;
 
+import org.hochnt.springmvcshop.entity.Category;
 import org.hochnt.springmvcshop.entity.Product;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -8,6 +9,8 @@ public class ProductInfo {
 	private String code;
 	private String name;
 	private double price;
+
+	private Category category;
 
 	private boolean newProduct = false;
 	// Upload image file.
@@ -24,10 +27,11 @@ public class ProductInfo {
 
 	// Không thay đổi Constructor này,
 	// nó được sử dụng trong Hibernate query.
-	public ProductInfo(String code, String name, double price) {
+	public ProductInfo(String code, String name, double price, Category category) {
 		this.code = code;
 		this.name = name;
 		this.price = price;
+		this.category = category;
 	}
 
 	public String getCode() {
@@ -60,6 +64,14 @@ public class ProductInfo {
 
 	public void setNewProduct(boolean newProduct) {
 		this.newProduct = newProduct;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public CommonsMultipartFile[] getFileDatas() {

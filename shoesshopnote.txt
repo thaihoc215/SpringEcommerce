@@ -78,11 +78,22 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
  - update self account info
 	+ edit view accountInfo.jsp
 	+ add controller accountInfo (POST) to update account
- - remove product	
+ 20/05:
+ - update productList view
+ - update productInfo view
+ 21/05:
+ - add Categories table and foreign from product to Categories
+ - add Categories data and update products data
+  - update model and entity for product by categories
+ - create model and entity hibernate for categories
+ - editting productDao get list product (include categories)
  Note: 
 
+ - add view for categories (show navbar)
+ - show products by categories
+ - remove product	
  - find product
- - add column size for product - order detail
+ - add column size(shoes) for product - order detail
  - Check validate cho signup (thông báo lỗi khi đã tồn tại tài khoản)
  - chuyển thông tin của người dùng đã đăng kí vào thông tin người dùng lúc mua hàng (logged in)
  - add gender for account
