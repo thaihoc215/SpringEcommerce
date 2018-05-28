@@ -2,6 +2,7 @@ package org.hochnt.springmvcshop.dao;
 
 import java.util.List;
 
+import org.hochnt.springmvcshop.entity.OrderDetail;
 import org.hochnt.springmvcshop.model.CartInfo;
 import org.hochnt.springmvcshop.model.OrderDetailInfo;
 import org.hochnt.springmvcshop.model.OrderInfo;
@@ -37,5 +38,7 @@ public interface OrderDAO {
 	 * @return
 	 */
 	public List<OrderDetailInfo> listOrderDetailInfo(String orderId);
+	
+	public OrderDetail findOrderDetail(String orderDetailId);
 	
 }

@@ -3,6 +3,8 @@ package org.hochnt.springmvcshop.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -98,7 +100,7 @@ public class Product implements Serializable {
 	}
 
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CATEGORY", nullable = false, //
 			foreignKey = @ForeignKey(name = "PRODUCT_CAT_FK"))
 	public Category getCategory() {

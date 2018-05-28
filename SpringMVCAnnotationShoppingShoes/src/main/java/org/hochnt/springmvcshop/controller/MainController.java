@@ -1,12 +1,16 @@
 package org.hochnt.springmvcshop.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hochnt.springmvcshop.dao.CategoryDAO;
 import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
+import org.hochnt.springmvcshop.entity.Category;
+import org.hochnt.springmvcshop.entity.OrderDetail;
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.CartInfo;
 import org.hochnt.springmvcshop.model.CustomerInfo;
@@ -41,14 +45,21 @@ public class MainController {
 	// autowired from DAO
 	private ProductDAO productDAO;
 
+	@Autowired
+	private CategoryDAO categoryDAO;
+
 	@RequestMapping("/403")
 	public String accessDenied() {
 		return "/403";
 	}
 
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model model) {
 		// di chuyển đến trang jsp tương ứng
+		List<Category> categories = null;
+		categories = categoryDAO.listCategory();
+		model.addAttribute("categories", categories);
+
 		return "index";
 	}
 
@@ -57,14 +68,20 @@ public class MainController {
 	@RequestMapping("/productList")
 	public String listProductHandler(Model model, //
 			@RequestParam(value = "name", defaultValue = "") String likeName,
-			@RequestParam(value = "page", defaultValue = "1") int page) {
+			@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "cat", defaultValue = "") String cat) {
 
 		final int maxResult = 8;// hien thi toi da 5 san pham 1 tran
 		final int maxNavigationPage = 10;// hien thi toi da 10 trang mot lan
-
-		// lay ket qua phan trang va dua vao paginationProduct tren view
-		PaginationResult<ProductInfo> rs = productDAO.queryProducts(page, maxResult, maxNavigationPage, likeName);
-		model.addAttribute("paginationProducts", rs);
+		PaginationResult<ProductInfo> rs = null;
+		
+		if (cat != null && cat.length() > 0) {
+			rs = categoryDAO.queryProducts(page, maxResult, maxNavigationPage, cat);
+		} else {
+			// lay ket qua phan trang va dua vao paginationProduct tren view
+			rs = productDAO.queryProducts(page, maxResult, maxNavigationPage, likeName);
+			model.addAttribute("paginationProducts", rs);
+		}
 		return "productList";
 	}
 
@@ -93,25 +110,27 @@ public class MainController {
 	@RequestMapping(value = { "/productInfo" }, method = RequestMethod.GET)
 	/**
 	 * Xem thong tin san pham
+	 * 
 	 * @param model
 	 * @param code
 	 * @return
 	 */
 	public String productInfoHandler(Model model, @RequestParam(value = "code", defaultValue = "") String code) {
 		ProductInfo productInfo = null;
-		
+
 		if (code != null && code.length() > 0) {
 			productInfo = productDAO.findProductInfo(code);
 		}
-		if(productInfo == null)
+		if (productInfo == null)
 			return "redirect:/productList";
-		model.addAttribute("productForm",productInfo);
+		model.addAttribute("productForm", productInfo);
 		return "productInfo";
 	}
-	
+
 	@RequestMapping(value = { "/productInfo" }, method = RequestMethod.POST)
 	/**
 	 * Mua san pham
+	 * 
 	 * @param model
 	 * @param code
 	 * @return

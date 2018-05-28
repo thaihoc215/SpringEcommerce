@@ -117,7 +117,7 @@ public class OrderDAOImpl implements OrderDAO {
 	 */
 	public OrderInfo getOrderInfo(String orderId) {
 		Order order = this.findOrder(orderId);
-		if(order == null)
+		if (order == null)
 			return null;
 		return new OrderInfo(order);
 	}
@@ -129,7 +129,17 @@ public class OrderDAOImpl implements OrderDAO {
 		Root<Order> root = query.from(Order.class);
 		query.select(root);
 		query.where(builder.equal(root.get("id"), orderId));
-        return (Order)  session.createQuery(query).uniqueResult();
+		return (Order) session.createQuery(query).uniqueResult();
+	}
+
+	public OrderDetail findOrderDetail(String orderDetailId) {
+		Session session = sessionFactory.getCurrentSession();
+		CriteriaBuilder builder = session.getCriteriaBuilder();
+		CriteriaQuery<OrderDetail> query = builder.createQuery(OrderDetail.class);
+		Root<OrderDetail> root = query.from(OrderDetail.class);
+		query.select(root);
+		query.where(builder.equal(root.get("id"), orderDetailId));
+		return (OrderDetail) session.createQuery(query).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -142,15 +152,15 @@ public class OrderDAOImpl implements OrderDAO {
 	 */
 	public List<OrderDetailInfo> listOrderDetailInfo(String orderId) {
 		String sql = "Select new " + OrderDetailInfo.class.getName() //
-                + "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
-                + " from " + OrderDetail.class.getName() + " d "//
-                + " where d.order.id = :orderId ";
- 
-        Session session = this.sessionFactory.getCurrentSession();
- 
-        Query<?> query = session.createQuery(sql);
-        query.setParameter("orderId", orderId);
- 
-        return (List<OrderDetailInfo>) query.list();
+				+ "(d.id, d.product.code, d.product.name , d.quanity,d.price,d.amount) "//
+				+ " from " + OrderDetail.class.getName() + " d "//
+				+ " where d.order.id = :orderId ";
+
+		Session session = this.sessionFactory.getCurrentSession();
+
+		Query<?> query = session.createQuery(sql);
+		query.setParameter("orderId", orderId);
+
+		return (List<OrderDetailInfo>) query.list();
 	}
 }

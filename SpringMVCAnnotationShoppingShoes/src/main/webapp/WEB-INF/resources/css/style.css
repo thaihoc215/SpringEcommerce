@@ -307,6 +307,14 @@ table td {
 	line-height: 30px;
 }
 
+/*product cat*/
+.innercard .color-cat {
+    float: left;
+    font-size: 13px;
+    line-height: 17px;
+    color: #616363;
+    margin: 0 0 6px 0
+}
 .main {
 	display: inline-block;
 }

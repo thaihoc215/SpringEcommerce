@@ -6,11 +6,14 @@ import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
 import org.hochnt.springmvcshop.dao.AccountDAO;
+import org.hochnt.springmvcshop.dao.CategoryDAO;
 import org.hochnt.springmvcshop.dao.OrderDAO;
 import org.hochnt.springmvcshop.dao.ProductDAO;
 import org.hochnt.springmvcshop.dao.impl.AccountDAOImpl;
+import org.hochnt.springmvcshop.dao.impl.CategoryDAOImpl;
 import org.hochnt.springmvcshop.dao.impl.OrderDAOImpl;
 import org.hochnt.springmvcshop.dao.impl.ProductDAOImpl;
+import org.hochnt.springmvcshop.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -139,5 +142,10 @@ public class ApplicationContextConfig {
 	@Bean(name = "accountDAO")
 	public AccountDAO getAccountDAO() {
 		return new AccountDAOImpl();
+	}
+
+	@Bean(name = "categoryDAO")
+	public CategoryDAO getCategoryDAO() {
+		return new CategoryDAOImpl();
 	}
 }

@@ -31,6 +31,9 @@
 							</a>
 						</div>
 						<div class="product-info-wrapper">
+							<div class="product-info-inner clear clearfix">
+								<div class="color-cat">${prInfo.category.name}</div>
+							</div>
 							<div class="hc-separator line-dotted-light divider-hor-top"></div>
 							<div class="clearfix">
 								<a

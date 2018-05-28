@@ -87,9 +87,15 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
   - update model and entity for product by categories
  - create model and entity hibernate for categories
  - editting productDao get list product (include categories)
+ 
+ 26/05
+  - change fetch for product-category entity (fetch eaze to get cat info)
+  - show product Categories in productList.jsp
+   - add view for categories (show list group)
+  - show productlist via category
  Note: 
 
- - add view for categories (show navbar)
+
  - show products by categories
  - remove product	
  - find product

@@ -15,6 +15,7 @@
 		<div class="row page-title">ECOMERCE WEB DEMO</div>
 		<div class="row page-title">SHOES ONLINE SHOP</div>
 		<div class="row">
+			<jsp:include page="_categories.jsp"></jsp:include>
 			<h3>Demo content</h3>
 
 			<ul>
