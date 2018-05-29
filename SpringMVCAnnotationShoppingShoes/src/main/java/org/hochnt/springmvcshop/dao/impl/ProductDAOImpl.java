@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.hochnt.springmvcshop.dao.ProductDAO;
+import org.hochnt.springmvcshop.entity.Category;
 import org.hochnt.springmvcshop.entity.Product;
 import org.hochnt.springmvcshop.model.PaginationResult;
 import org.hochnt.springmvcshop.model.ProductInfo;
@@ -44,6 +45,7 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	/**
 	 * Luu hoac them moi mot san pham
+	 * 
 	 * @param productInfo
 	 */
 	public void save(HttpServletRequest request, ProductInfo productInfo) {
@@ -55,7 +57,7 @@ public class ProductDAOImpl implements ProductDAO {
 		if (code != null) {
 			product = this.findProduct(code);
 		}
-		//neu khong tim thay san pham => them moi
+		// neu khong tim thay san pham => them moi
 		if (product == null) {
 			isNew = true;
 			product = new Product();
@@ -91,13 +93,14 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	//dung cho viec tim kiem san pham voi like name
+	// dung cho viec tim kiem san pham voi like name
 	public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage,
 			String likeName) {
-		String sql = "Select new " + ProductInfo.class.getName() + "(p.code,p.name,p.price,p.category)" + " from "
-				+ Product.class.getName() + " p";
+		String sql = "Select new " + ProductInfo.class.getName() + "(p.code,p.name,p.price,c.id,c.name)" + " from "
+				+ Product.class.getName() + " p," + Category.class.getName() + " c";
+		sql += " Where p.category = c.id";
 		if (likeName != null && likeName.length() > 0) {
-			sql += " Where lower(p.name) like :likeName ";
+			sql += " and lower(p.name) like :likeName ";
 		}
 		sql += " order by p.code asc, p.createDate desc ";
 		System.out.println(sql);

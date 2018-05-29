@@ -54,11 +54,11 @@ public class MainController {
 	}
 
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(HttpServletRequest request) {
 		// di chuyển đến trang jsp tương ứng
-		List<Category> categories = null;
-		categories = categoryDAO.listCategory();
-		model.addAttribute("categories", categories);
+		if (request.getServletContext().getAttribute("categories") == null)
+			categoryDAO.listCategory();
+		// model.addAttribute("categories", categories);
 
 		return "index";
 	}
@@ -74,14 +74,16 @@ public class MainController {
 		final int maxResult = 8;// hien thi toi da 5 san pham 1 tran
 		final int maxNavigationPage = 10;// hien thi toi da 10 trang mot lan
 		PaginationResult<ProductInfo> rs = null;
-		
+
 		if (cat != null && cat.length() > 0) {
 			rs = categoryDAO.queryProducts(page, maxResult, maxNavigationPage, cat);
 		} else {
 			// lay ket qua phan trang va dua vao paginationProduct tren view
 			rs = productDAO.queryProducts(page, maxResult, maxNavigationPage, likeName);
-			model.addAttribute("paginationProducts", rs);
+
 		}
+		if (rs != null)
+			model.addAttribute("paginationProducts", rs);
 		return "productList";
 	}
 

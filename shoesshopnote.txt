@@ -93,12 +93,15 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
   - show product Categories in productList.jsp
    - add view for categories (show list group)
   - show productlist via category
+  
+ 29/05:
+  - done show product by categories
+  - doing find product
+  - edit add categories result to serverlet context
  Note: 
-
-
- - show products by categories
+  - find product
  - remove product	
- - find product
+
  - add column size(shoes) for product - order detail
  - Check validate cho signup (thông báo lỗi khi đã tồn tại tài khoản)
  - chuyển thông tin của người dùng đã đăng kí vào thông tin người dùng lúc mua hàng (logged in)

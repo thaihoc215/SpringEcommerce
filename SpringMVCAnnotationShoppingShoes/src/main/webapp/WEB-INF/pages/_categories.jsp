@@ -6,7 +6,7 @@
 <div class="col-md-3">
 	<div class="list-group">
 		<c:forEach items="${categories}" var="cat">
-			<a href="${pageContext.request.contextPath}/productList?cat=${cat.name}"
+			<a href="${pageContext.request.contextPath}/productList?cat=${cat.id}"
 				class="list-group-item">${cat.name}</a>
 		</c:forEach>
 	</div>

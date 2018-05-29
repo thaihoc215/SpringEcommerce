@@ -100,7 +100,7 @@ public class Product implements Serializable {
 	}
 
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CATEGORY", nullable = false, //
 			foreignKey = @ForeignKey(name = "PRODUCT_CAT_FK"))
 	public Category getCategory() {

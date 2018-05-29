@@ -3,6 +3,7 @@
 
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <div class="menu-container">
 	<nav class="navbar navbar-default">
@@ -23,8 +24,7 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a
-						href="${pageContext.request.contextPath}/">Home <span
+					<li><a href="${pageContext.request.contextPath}/">Home <span
 							class="sr-only">(current)</span></a></li>
 					<li><a href="${pageContext.request.contextPath}/productList">Product
 							List</a></li>
@@ -50,17 +50,15 @@
 								Manage Account </a></li>
 					</security:authorize>
 				</ul>
-				<!-- 
-				<form class="navbar-form navbar-left">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-					<button type="submit" class="btn btn-default">Submit</button>
-				</form> -->
+				<form:form action="${pageContext.request.contextPath}/productList" method="GET" class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search" name="cat">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form:form>
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
-	
+
 </div>

@@ -26,7 +26,6 @@ public class SpringWebAppInitializer implements WebApplicationInitializer {
 		ContextLoaderListener contextLoaderListener = new ContextLoaderListener(appContext);
         servletContext.addListener(contextLoaderListener);
          
-         
         // Filter.
         FilterRegistration.Dynamic fr = servletContext.addFilter("encodingFilter", CharacterEncodingFilter.class);
  

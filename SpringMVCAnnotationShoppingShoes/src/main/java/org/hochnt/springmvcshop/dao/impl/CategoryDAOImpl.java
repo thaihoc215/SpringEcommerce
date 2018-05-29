@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.servlet.ServletContext;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,6 +25,9 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
+	@Autowired
+    private ServletContext servletContext;
+	
 	@Override
 	public List<Category> listCategory() {
 		Session session = sessionFactory.getCurrentSession();
@@ -31,14 +35,17 @@ public class CategoryDAOImpl implements CategoryDAO {
 		CriteriaQuery<Category> query = builder.createQuery(Category.class);
 		Root<Category> root = query.from(Category.class);
 		query.select(root);
-		return (List<Category>) session.createQuery(query).getResultList();
+		List<Category> rs = (List<Category>) session.createQuery(query).getResultList();
+		servletContext.setAttribute("categories", rs);
+		return rs;
 	}
 
 	@Override
 	public PaginationResult<ProductInfo> queryProducts(int page, int maxResult, int maxNavigationPage, String cat) {
-		String sql = "Select new " + ProductInfo.class.getName() + "(p.code,p.name,p.price,p.category)" + " from "
-				+ Product.class.getName() + " p";
-		sql += " Where p.category.name != :cat ";
+		String sql = "Select new " + ProductInfo.class.getName() + "(p.code,p.name,p.price,c.id,c.name)" + " from "
+				+ Product.class.getName() + " p," + Category.class.getName() + " c";
+		sql += " Where p.category = c.id";
+		sql += " And p.category.id = :cat ";
 		sql += " order by p.code asc, p.createDate desc ";
 		System.out.println(sql);
 		Session session = sessionFactory.getCurrentSession();
