@@ -50,10 +50,14 @@
 								Manage Account </a></li>
 					</security:authorize>
 				</ul>
-				<form:form action="${pageContext.request.contextPath}/productList" method="GET" class="form-inline my-2 my-lg-0">
-					<input class="form-control mr-sm-2" type="search"
-						placeholder="Search" aria-label="Search" name="cat">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				<form:form action="${pageContext.request.contextPath}/productList"
+					method="GET" class="navbar-form navbar-right">
+					<div class="form-group">
+						<input class="form-control" type="search"
+							placeholder="Product Name" aria-label="Product Name" name="likeName">
+					</div>
+
+					<button class="btn btn-default" type="submit">Search</button>
 				</form:form>
 			</div>
 			<!-- /.navbar-collapse -->

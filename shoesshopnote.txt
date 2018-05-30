@@ -95,17 +95,26 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
   - show productlist via category
   
  29/05:
-  - done show product by categories
-  - doing find product
-  - edit add categories result to serverlet context
+  - finish search product
+  - edit productList view
+  - add table "Shoessize" 
+  - adding entity and model for shoessize
+  
  Note: 
-  - find product
+ - adding entity and model for shoessize
+ - add entity and model for shoessize
+ - get product size (Shoessize)
+ - Show product size to view (Product.jsp)
+ - Set size to orderdetail
+ - Down number left after buy a product
+ - add gender for account
+ - tạo lịch sử giao dịch của một tài khoản
+ - set size image khi upload
  - remove product	
-
- - add column size(shoes) for product - order detail
+ 
  - Check validate cho signup (thông báo lỗi khi đã tồn tại tài khoản)
  - chuyển thông tin của người dùng đã đăng kí vào thông tin người dùng lúc mua hàng (logged in)
- - add gender for account
+ 
  - confirm change password for update self accountinfo
  - show message confirm update for all form update information and message success/failed after update
  - tạo thumbnailImg 
@@ -115,7 +124,7 @@ tao class imp Order DAO => luu don hang, chi tiet don hang sau khi mua hang
  - chưa tùy chỉnh độ maximum ảnh
  - chưa tạo check error cho đơn hàng
  - chưa lưu ảnh lên server => đang lưu vào byte
- - set size image khi upload
+ 
  - tạo chức năng confirm email khi đăng kí
- - tạo lịch sử giao dịch của một tài khoản
+ 
  - update phan quyen cho tat ca cac page

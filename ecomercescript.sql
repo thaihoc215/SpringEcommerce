@@ -1,9 +1,9 @@
 CREATE TABLE Accounts (
 	User_Name VARCHAR (20) NOT NULL,
 	Active BOOLEAN NOT NULL,
-	PASSWORD VARCHAR (20) NOT NULL,
+	Password VARCHAR (20) NOT NULL,
 	User_Role VARCHAR (20) NOT NULL,
-	NAME VARCHAR (50) NOT NULL,
+	Name VARCHAR (50) NOT NULL,
 	Email VARCHAR (50) NOT NULL,
 	Phone_Number VARCHAR (12),
 	Address VARCHAR (200),
@@ -36,7 +36,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE Categories (
 	ID VARCHAR (20) NOT NULL,
-	NAME VARCHAR (255) NOT NULL,
+	Name VARCHAR (255) NOT NULL,
 	PRIMARY KEY (ID)
 );
 
@@ -44,11 +44,19 @@ CREATE TABLE Products (
 	Code VARCHAR (20) NOT NULL,
 	Create_Date TIME NOT NULL,
 	Image BYTEA,
-	NAME VARCHAR (255) NOT NULL,
-	Price DOUBLE PRECISION NOT NULL,
+	Name VARCHAR (255) NOT NULL,
+	Price DOUBLE PRECISION NOT NULL
+	Size DOUBLE
 	Category VARCHAR (20) NOT NULL,
 	Date_Updated DATE NOT NULL,
 	PRIMARY KEY (Code)
+);
+
+CREATE TABLE Shoessize(
+	Shoes_Code VARCHAR (20) NOT NULL,
+	Shoe_Size DOUBLE PRECISION NOt NULL,
+	Number_Left SMALLINT NOT NULL,
+	PRIMARY KEY (Shoes_Code,Shoe_Size)
 );
 
 ALTER TABLE Orders ADD CONSTRAINT UK_sxhpvsj665kmi4f7jdu9d2791 UNIQUE (Order_Num);
@@ -58,6 +66,8 @@ ALTER TABLE Order_Details ADD CONSTRAINT ORDER_DETAIL_ORD_FK FOREIGN KEY (ORDER_
 ALTER TABLE Order_Details ADD CONSTRAINT ORDER_DETAIL_PROD_FK FOREIGN KEY (PRODUCT_ID) REFERENCES Products (Code);
 
 ALTER TABLE Products ADD CONSTRAINT PRODUCT_CAT_FK FOREIGN KEY (Category) REFERENCES Categories (ID)
+
+ALTER TABLE Shoessize ADD CONSTRAINT SHOESSIZE_PRODUCT_PK FOREIGN KEY (Shoes_Code) REFERENCES Products (Code)
 
 --insert data Accounts
 insert into Accounts (user_name, active, password, user_role, name, email, phone_number, address, date_create, date_updated)
@@ -70,6 +80,13 @@ values ('manager1', '1', '123', 'MANAGER','thaihoc2','thaihoc2105@gmail.com','01
 INSERT INTO public.Categories(ID, NAME) VALUES ('C001', 'Adidas');
 INSERT INTO public.Categories(ID, NAME) VALUES ('C002', 'Puma');
 INSERT INTO public.Categories(ID, NAME) VALUES ('C003', 'Nike');
+
+--insert data for shoesize
+INSERT INTO public.Shoessize(Shoes_Code, Shoe_Size, Number_Left) VALUES ('S001', 6.5,100);
+INSERT INTO public.Shoessize(Shoes_Code, Shoe_Size, Number_Left) VALUES ('S001', 7.0,100);
+INSERT INTO public.Shoessize(Shoes_Code, Shoe_Size, Number_Left) VALUES ('S001', 7.5,100);
+INSERT INTO public.Shoessize(Shoes_Code, Shoe_Size, Number_Left) VALUES ('S001', 8.0,100);
+INSERT INTO public.Shoessize(Shoes_Code, Shoe_Size, Number_Left) VALUES ('S001', 8.5,100);
 
 --insert data Products
 INSERT INTO public.products(code, name, price,create_date, date_updated, category)

@@ -28,5 +28,10 @@
 		$('ul.nav a').filter(function() {
 			return this.href == url;
 		}).parent().addClass('active');
+		
+		$('.list-group-item').parent().addClass('active');
+		$('.list-group-item').filter(function() {
+			return this.href == url;
+		}).parent().addClass('active');
 	});
 </script>

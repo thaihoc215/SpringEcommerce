@@ -21,9 +21,9 @@
 
 		<div class="row">
 			<jsp:include page="_categories.jsp"></jsp:include>
-			<div class="col-md-9">
+			<div class="col-xs-6 col-md-9">
 				<c:forEach items="${paginationProducts.list }" var="prInfo">
-					<div class="hockeycard">
+					<div class="hockeycard ">
 						<div class="innercard">
 							<div class="image">
 								<a

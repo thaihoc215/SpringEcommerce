@@ -66,8 +66,8 @@ public class MainController {
 	/*------------------------Sản phẩm-------------------------*/
 	// Danh sách sản phẩm.
 	@RequestMapping("/productList")
-	public String listProductHandler(Model model, //
-			@RequestParam(value = "name", defaultValue = "") String likeName,
+	public String productListHandler(Model model, //
+			@RequestParam(value = "likeName", defaultValue = "") String likeName,
 			@RequestParam(value = "page", defaultValue = "1") int page,
 			@RequestParam(value = "cat", defaultValue = "") String cat) {
 

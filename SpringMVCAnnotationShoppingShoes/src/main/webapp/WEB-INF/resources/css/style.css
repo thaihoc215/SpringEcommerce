@@ -167,9 +167,15 @@ table td {
 }
 /*----product list item------*/
 .hockeycard {
-	width: 230px;
-	height: 335px;
+	display: block;
+	width: 240px;
+	height: 350px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	line-height: 1.42857143;
 	position: relative;
+	padding: 4px;
 	float: left;
 	margin: 0 0 42px 10px;
 	z-index: 0;
@@ -177,7 +183,8 @@ table td {
 	-moz-transition: z-index .2s ease-in-out 0s;
 	-ms-transition: z-index .2s ease-in-out 0s;
 	-o-transition: z-index .2s ease-in-out 0s;
-	transition: z-index .2s ease-in-out 0s
+	transition: z-index .2s ease-in-out 0s;
+	border-radius: 4px;
 }
 
 .innercard {
@@ -309,12 +316,13 @@ table td {
 
 /*product cat*/
 .innercard .color-cat {
-    float: left;
-    font-size: 13px;
-    line-height: 17px;
-    color: #616363;
-    margin: 0 0 6px 0
+	float: left;
+	font-size: 13px;
+	line-height: 17px;
+	color: #616363;
+	margin: 0 0 6px 0
 }
+
 .main {
 	display: inline-block;
 }
@@ -355,5 +363,4 @@ table td {
 .quantity_selector {
 	padding-left: 5px;
 	margin-bottom: 10px;
-	
 }
